@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Автоматизация 1С, дашборды и калькуляторы</title>
-<meta name="description" content="Обработки для 1С, дашборды для руководителя и бесплатные калькуляторы. Меньше ручной работы, быстрее счета и платежи, цифры бизнеса на одном экране.">
+<title>Дашборды и автоматизация для бизнеса</title>
+<meta name="description" content="Дашборды для руководителя из 1С, Битрикс24, amoCRM, банка и таблиц, боты и автоматизация рутины. Цифры бизнеса на одном экране.">
 <style>
-:root{--bg:#fbfaf7;--bg2:#f2f0ea;--card:#fff;--tx:#17191f;--mut:#667085;--line:#e6e3da;--g:#16a34a;--gs:#e8f6ec;--b:#2563eb;--bs:#e8effd;--o:#ea6a3a;--os:#fdeee6;--y:#f4b740;--ys:#fef5e0;--r:18px}
-@media (prefers-color-scheme:dark){:root{--bg:#0f1115;--bg2:#161920;--card:#181c24;--tx:#edf0f5;--mut:#98a2b3;--line:#262b36;--gs:#12261a;--bs:#142039;--os:#2b1a12;--ys:#2a2210}}
+:root{--bg:#fbfaf7;--bg2:#f2f0ea;--card:#fff;--tx:#17191f;--mut:#667085;--line:#e6e3da;--g:#0e7490;--gs:#e2f3f7;--b:#1d4ed8;--bs:#e6edfb;--o:#475569;--os:#eaedf2;--y:#64748b;--ys:#eef1f6;--r:18px}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1115;--bg2:#161920;--card:#181c24;--tx:#edf0f5;--mut:#98a2b3;--line:#262b36;--gs:#0e2a31;--bs:#142039;--os:#1a2029;--ys:#1a1f29}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
@@ -69,7 +69,7 @@ h2{font-size:clamp(28px,4vw,42px);line-height:1.1;letter-spacing:-.03em;margin:0
 .row>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:48px 1fr auto;gap:18px;align-items:center;padding:22px 4px}
 .row>summary::-webkit-details-marker{display:none}
 .row .n{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-weight:800;font-size:18px}
-.row:nth-child(4n+1) .n{background:var(--gs);color:var(--g)}.row:nth-child(4n+2) .n{background:var(--bs);color:var(--b)}.row:nth-child(4n+3) .n{background:var(--os);color:var(--o)}.row:nth-child(4n+4) .n{background:var(--ys);color:#b7791f}
+.row:nth-child(4n+1) .n{background:var(--gs);color:var(--g)}.row:nth-child(4n+2) .n{background:var(--bs);color:var(--b)}.row:nth-child(4n+3) .n{background:var(--os);color:var(--o)}.row:nth-child(4n+4) .n{background:var(--ys);color:#475569}
 .row h3{margin:0;font-size:20px;letter-spacing:-.015em;line-height:1.3}
 .row .t{color:var(--mut);font-size:15px;margin-top:3px}
 .row .pl{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:transform .25s,background .2s;font-size:20px;line-height:1}
@@ -78,7 +78,7 @@ h2{font-size:clamp(28px,4vw,42px);line-height:1.1;letter-spacing:-.03em;margin:0
 @media(max-width:760px){.row .body{grid-template-columns:1fr;padding-left:4px}.row>summary{grid-template-columns:44px 1fr auto;gap:12px}}
 .row ul{margin:0;padding:0;list-style:none}
 .row li{padding:7px 0 7px 28px;position:relative;color:var(--tx)}
-.row li::before{content:"";position:absolute;left:0;top:14px;width:16px;height:16px;border-radius:50%;background:var(--gs) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.3l2.2 2.2 4.8-4.8' fill='none' stroke='%2316a34a' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.row li::before{content:"";position:absolute;left:0;top:14px;width:16px;height:16px;border-radius:50%;background:var(--gs) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.3l2.2 2.2 4.8-4.8' fill='none' stroke='%230e7490' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
 .row .side{background:var(--bg2);border-radius:14px;padding:18px;align-self:start}
 .row .side p{margin:0 0 14px;font-size:15px;color:var(--mut)}
 .row .side b{color:var(--tx)}
@@ -135,26 +135,26 @@ footer{padding:28px 0 56px;color:var(--mut);font-size:14px}
 .bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
 .bg::before{content:"";position:absolute;inset:0;background-image:radial-gradient(color-mix(in srgb,var(--tx) 14%,transparent) 1px,transparent 1.2px);background-size:26px 26px;-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000,transparent 75%);mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000,transparent 75%)}
 .bg b{position:absolute;border-radius:50%;filter:blur(90px);opacity:.45;will-change:transform;animation:drift 22s ease-in-out infinite alternate}
-.bg b:nth-child(1){width:520px;height:520px;background:#34d399;left:-120px;top:-140px}
-.bg b:nth-child(2){width:600px;height:600px;background:#60a5fa;right:-160px;top:40px;animation-duration:28s;animation-delay:-6s}
-.bg b:nth-child(3){width:440px;height:440px;background:#fb923c;left:30%;top:420px;opacity:.28;animation-duration:32s;animation-delay:-12s}
+.bg b:nth-child(1){width:520px;height:520px;background:#3b82f6;left:-120px;top:-140px}
+.bg b:nth-child(2){width:600px;height:600px;background:#0891b2;right:-160px;top:40px;animation-duration:28s;animation-delay:-6s}
+.bg b:nth-child(3){width:440px;height:440px;background:#1e3a8a;left:30%;top:420px;opacity:.28;animation-duration:32s;animation-delay:-12s}
 @media(prefers-color-scheme:dark){.bg b{opacity:.22}.bg b:nth-child(3){opacity:.14}}
 @keyframes drift{to{transform:translate3d(60px,50px,0) scale(1.12)}}
 .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 section.alt{background:color-mix(in srgb,var(--bg2) 70%,transparent);backdrop-filter:blur(6px)}
 /* стекло и подсветка за курсором */
-.dash{background:color-mix(in srgb,var(--card) 78%,transparent);backdrop-filter:blur(18px);border-color:color-mix(in srgb,var(--line) 70%,#fff);box-shadow:0 40px 80px -30px rgba(37,99,235,.35),0 0 0 1px rgba(255,255,255,.4) inset;animation:float 7s ease-in-out infinite}
+.dash{background:color-mix(in srgb,var(--card) 78%,transparent);backdrop-filter:blur(18px);border-color:color-mix(in srgb,var(--line) 70%,#fff);box-shadow:0 40px 80px -30px rgba(30,64,175,.3),0 0 0 1px rgba(255,255,255,.4) inset;animation:float 7s ease-in-out infinite}
 @keyframes float{50%{transform:translateY(-10px)}}
 .spot{position:relative;overflow:hidden}
-.spot::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(52,211,153,.22),transparent 55%);opacity:0;transition:opacity .25s;pointer-events:none}
+.spot::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(59,130,246,.2),transparent 55%);opacity:0;transition:opacity .25s;pointer-events:none}
 .spot:hover::before{opacity:1}
 .why div,.calc,.frame,.final{position:relative}
 .why div{border:1px solid color-mix(in srgb,var(--line) 60%,transparent);backdrop-filter:blur(4px)}
 .calc{background:color-mix(in srgb,var(--card) 80%,transparent);backdrop-filter:blur(8px)}
-.btn:not(.o):not(.s){box-shadow:0 10px 26px -10px rgba(22,163,74,.55)}
+.btn:not(.o):not(.s){box-shadow:0 10px 26px -10px rgba(29,78,216,.5)}
 .btn.g{background:linear-gradient(120deg,var(--g),var(--b));border-color:transparent;color:#fff}
-h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margin-top:14px;background:linear-gradient(90deg,var(--g),var(--b),var(--o))}
-.final{background:radial-gradient(900px 300px at 20% 0%,rgba(52,211,153,.35),transparent 60%),radial-gradient(800px 320px at 90% 100%,rgba(96,165,250,.35),transparent 60%),var(--tx);overflow:hidden}
+h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margin-top:14px;background:linear-gradient(90deg,var(--g),var(--b))}
+.final{background:radial-gradient(900px 300px at 20% 0%,rgba(59,130,246,.4),transparent 60%),radial-gradient(800px 320px at 90% 100%,rgba(14,116,144,.4),transparent 60%),var(--tx);overflow:hidden}
 .final h2::after{margin:14px auto 0}
 /* бегущая строка */
 .marq{overflow:hidden;border-block:1px solid var(--line);background:color-mix(in srgb,var(--card) 60%,transparent);padding:14px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
@@ -163,22 +163,51 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margi
 @keyframes mq{to{transform:translateX(-50%)}}
 .mail{display:inline-flex;align-items:center;gap:8px}
 @media(prefers-reduced-motion:reduce){.bg b,.dash,.marq div{animation:none}}
+
+/* конструктор */
+.kon{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
+@media(max-width:900px){.kon{grid-template-columns:1fr}}
+.kon fieldset{border:0;padding:0;margin:0 0 24px}
+.kon legend{font-weight:700;font-size:15px;margin-bottom:12px;color:var(--tx)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-flex;align-items:center;gap:8px;padding:10px 15px;border-radius:12px;border:1px solid var(--line);background:var(--card);font-size:15px;font-weight:600;transition:all .15s;user-select:none}
+.chips span::before{content:"";width:18px;height:18px;border-radius:6px;border:1.5px solid var(--mut);background:transparent center/12px no-repeat;transition:all .15s}
+.chips input:checked+span{border-color:var(--b);background:var(--bs);color:var(--b)}
+.chips input:checked+span::before{background-color:var(--b);border-color:var(--b);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.4l3 3 6-6.4' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.chips input:focus-visible+span{outline:2px solid var(--b);outline-offset:2px}
+.out{background:color-mix(in srgb,var(--card) 82%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 30px 60px -34px rgba(30,64,175,.35);min-height:260px}
+.out h3{margin:0 0 4px;font-size:18px}
+.out .hint{color:var(--mut);font-size:14px;margin:0 0 14px}
+.blk{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:var(--card);overflow:hidden}
+.blk summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:12px;padding:14px 16px;font-weight:650}
+.blk summary::-webkit-details-marker{display:none}
+.blk summary i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-style:normal;background:var(--bs);color:var(--b);font-size:17px}
+.blk summary em{margin-left:auto;font-style:normal;font-size:12px;font-weight:700;color:var(--g);background:var(--gs);padding:3px 9px;border-radius:999px}
+.blk summary::after{content:"+";color:var(--mut);font-size:20px;margin-left:6px;transition:transform .2s}
+.blk[open] summary::after{transform:rotate(45deg)}
+.blk div{padding:0 16px 16px 62px;color:var(--mut);font-size:15px}
+.blk div p{margin:0 0 8px}
+.blk div .src{font-size:13px;color:var(--b);font-weight:600}
+.empty{color:var(--mut);padding:30px 6px;text-align:center}
+.out .cta{margin-top:14px}
 </style>
 </head>
 <body>
 <div class="bg" aria-hidden="true"><b></b><b></b><b></b></div><div class="grain" aria-hidden="true"></div>
 <nav class="top"><div class="w">
 <a class="logo" href="#"><i></i>Автоматизация</a>
-<div class="links"><a href="#produkty">Обработки 1С</a><a href="#dashbordy">Дашборды</a><a href="#kalkulyatory">Калькуляторы</a><a href="#kak">Как работаю</a></div>
+<div class="links"><a href="#konstruktor">Конструктор</a><a href="#dashbordy">Дашборды</a><a href="#produkty">Обработки 1С</a><a href="#kalkulyatory">Калькуляторы</a><a href="#kak">Как работаю</a></div>
 <a class="btn s g" href="#kontakty">Написать</a>
 </div></nav>
 
 <header class="hero"><div class="w">
 <div>
-<span class="eyebrow">● Автоматизация для бизнеса</span>
-<h1>Меньше рутины. Быстрее платежи. <em>Больше прибыли.</em></h1>
-<p class="lead">Обработки для 1С, дашборды для руководителя и связки между программами. Не новые затраты, а меньше расходов и быстрее работа с теми же людьми.</p>
-<div class="cta"><a class="btn" href="#produkty">Смотреть решения</a><a class="btn o" href="#dashbordy">Пример дашборда</a></div>
+<span class="eyebrow">● Дашборды и автоматизация для бизнеса</span>
+<h1>Цифры бизнеса <em>на одном экране</em>, а рутина сама</h1>
+<p class="lead">Собираю дашборды из 1С, Битрикс24, amoCRM, банка и таблиц, подключаю ботов и убираю ручную работу. Меньше расходов, быстрее решения, больше прибыли.</p>
+<div class="cta"><a class="btn" href="#konstruktor">Собрать свой дашборд</a><a class="btn o" href="#dashbordy">Посмотреть пример</a></div>
 </div>
 <div class="dash rv" aria-label="Пример панели руководителя">
 <div class="bar"><span></span><span></span><span></span><small>пример, данные вымышленные</small></div>
@@ -191,7 +220,7 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margi
 <div class="cap"><span>сен</span><span>выручка по месяцам</span><span>авг</span></div>
 </div>
 </div></header>
-<div class="marq" aria-hidden="true"><div><span>1С:Бухгалтерия</span><span>Банковские выписки</span><span>ЭДО</span><span>Google Таблицы</span><span>Платёжные поручения</span><span>Сверки</span><span>Telegram и ВК</span><span>Дашборды</span><span>Управленческая отчётность</span><span>1С:Бухгалтерия</span><span>Банковские выписки</span><span>ЭДО</span><span>Google Таблицы</span><span>Платёжные поручения</span><span>Сверки</span><span>Telegram и ВК</span><span>Дашборды</span><span>Управленческая отчётность</span></div></div>
+<div class="marq" aria-hidden="true"><div><span>Дашборды</span><span>Битрикс24</span><span>amoCRM</span><span>1С</span><span>Банк и выписки</span><span>Google Таблицы</span><span>Excel</span><span>Telegram</span><span>ВКонтакте</span><span>Боты и ИИ-агенты</span><span>Платёжные поручения</span><span>Сверки</span><span>Управленческая отчётность</span><span>Дашборды</span><span>Битрикс24</span><span>amoCRM</span><span>1С</span><span>Банк и выписки</span><span>Google Таблицы</span><span>Excel</span><span>Telegram</span><span>ВКонтакте</span><span>Боты и ИИ-агенты</span><span>Платёжные поручения</span><span>Сверки</span><span>Управленческая отчётность</span></div></div>
 
 <section class="alt"><div class="w">
 <p class="k rv">Что это даёт</p>
@@ -204,9 +233,47 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margi
 </div>
 </div></section>
 
+<section id="konstruktor"><div class="w">
+<p class="k rv">Конструктор</p>
+<h2 class="rv">Отметьте, откуда данные и что хотите видеть</h2>
+<p class="sub rv">Справа появится, какие блоки можно собрать. Нажмите на блок, чтобы раскрыть подробности.</p>
+<div class="kon rv">
+<div>
+<fieldset><legend>1. Где лежат ваши данные</legend><div class="chips" id="src">
+<label><input type="checkbox" value="1c" checked><span>1С</span></label>
+<label><input type="checkbox" value="b24"><span>Битрикс24</span></label>
+<label><input type="checkbox" value="amo"><span>amoCRM</span></label>
+<label><input type="checkbox" value="bank" checked><span>Банк и выписки</span></label>
+<label><input type="checkbox" value="gs"><span>Google Таблицы, Excel</span></label>
+<label><input type="checkbox" value="bot"><span>Telegram, ВК, боты</span></label>
+</div></fieldset>
+<fieldset><legend>2. Что хотите видеть</legend><div class="chips" id="goal">
+<label><input type="checkbox" value="money" checked><span>Деньги и прибыль</span></label>
+<label><input type="checkbox" value="sales" checked><span>Продажи и воронка</span></label>
+<label><input type="checkbox" value="debt"><span>Долги и сроки</span></label>
+<label><input type="checkbox" value="docs"><span>Договоры и документы</span></label>
+<label><input type="checkbox" value="clients"><span>Заявки и ответы клиентам</span></label>
+</div></fieldset>
+</div>
+<div class="out" id="out" aria-live="polite"></div>
+</div>
+</div></section>
+
+
+<section class="alt" id="dashbordy"><div class="w show">
+<div class="rv">
+<p class="k">Дашборды</p>
+<h2>Цифры бизнеса на одном экране</h2>
+<p class="sub" style="margin-bottom:22px">Открываются на телефоне, без входа и установки программ. Данные остаются там, где они есть: в 1С, таблицах или банке.</p>
+<ul class="pills"><li>Выручка и прибыль</li><li>Движение денег</li><li>Расходы по статьям</li><li>Воронка продаж</li><li>Реестр договоров</li></ul>
+<div class="cta"><a class="btn" href="https://valeraslim86-afk.github.io/showroom/upravlenie.html">Открыть пример</a><a class="btn o" href="https://valeraslim86-afk.github.io/showroom/dogovory.html">Реестр договоров</a></div>
+<p style="color:var(--mut);font-size:14px;margin-top:16px">Компании и суммы в примерах вымышленные.</p>
+</div>
+<div class="frame rv"><div class="bar"><span></span><span></span><span></span></div><a class="view" href="https://valeraslim86-afk.github.io/showroom/upravlenie.html" style="display:block"><img src="img/upravlenie-pc.png" alt="Пример управленческого дашборда" loading="lazy"></a></div>
+</div></section>
 <section id="produkty"><div class="w">
-<p class="k rv">Обработки для 1С:Бухгалтерии</p>
-<h2 class="rv">Готовые решения, которые подключаются как обычный файл</h2>
+<p class="k rv">Если вы работаете в 1С</p>
+<h2 class="rv">Готовые обработки для 1С</h2>
 <p class="sub rv">Внешние обработки не меняют конфигурацию. Откройте строку, чтобы увидеть, что внутри.</p>
 <div class="list rv">
 
@@ -228,20 +295,7 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margi
 
 </div>
 </div></section>
-
-<section class="alt" id="dashbordy"><div class="w show">
-<div class="rv">
-<p class="k">Дашборды</p>
-<h2>Цифры бизнеса на одном экране</h2>
-<p class="sub" style="margin-bottom:22px">Открываются на телефоне, без входа и установки программ. Данные остаются там, где они есть: в 1С, таблицах или банке.</p>
-<ul class="pills"><li>Выручка и прибыль</li><li>Движение денег</li><li>Расходы по статьям</li><li>Воронка продаж</li><li>Реестр договоров</li></ul>
-<div class="cta"><a class="btn" href="https://valeraslim86-afk.github.io/showroom/upravlenie.html">Открыть пример</a><a class="btn o" href="https://valeraslim86-afk.github.io/showroom/dogovory.html">Реестр договоров</a></div>
-<p style="color:var(--mut);font-size:14px;margin-top:16px">Компании и суммы в примерах вымышленные.</p>
-</div>
-<div class="frame rv"><div class="bar"><span></span><span></span><span></span></div><a class="view" href="https://valeraslim86-afk.github.io/showroom/upravlenie.html" style="display:block"><img src="img/upravlenie-pc.png" alt="Пример управленческого дашборда" loading="lazy"></a></div>
-</div></section>
-
-<section id="kalkulyatory"><div class="w">
+<section class="alt" id="kalkulyatory"><div class="w">
 <p class="k rv">Бесплатно</p>
 <h2 class="rv">Калькуляторы, которыми можно пользоваться сразу</h2>
 <p class="sub rv">Работают в браузере и на телефоне, без регистрации. Расчёты по нормам 2026 года.</p>
@@ -257,7 +311,7 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margi
 </div>
 </div></section>
 
-<section class="alt" id="kak"><div class="w">
+<section id="kak"><div class="w">
 <p class="k rv">Как работаю</p>
 <h2 class="rv">Три шага от боли до результата</h2>
 <p class="sub rv"></p>
@@ -297,6 +351,25 @@ function count(el){var t=parseFloat(el.dataset.n),d=+el.dataset.d,s=el.dataset.s
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;e.target.classList.add("in");if(e.target.classList.contains("dash")){bars();e.target.querySelectorAll("[data-n]").forEach(count)}io.unobserve(e.target)})},{threshold:.15});
 document.querySelectorAll(".rv").forEach(function(el){io.observe(el)});
 document.addEventListener("pointermove",function(e){var s=e.target.closest&&e.target.closest(".spot");if(!s)return;var r=s.getBoundingClientRect();s.style.setProperty("--mx",(e.clientX-r.left)+"px");s.style.setProperty("--my",(e.clientY-r.top)+"px")});
+
+var G={
+ money:{i:"₽",t:"Деньги и прибыль",from:["1c","bank","gs"],d:"Выручка, себестоимость и прибыль по месяцам, движение денег, остаток на счетах, расходы по статьям.",ul:["Выручка и прибыль по месяцам","Поступления и платежи, остаток денег","Куда уходят деньги: расходы по статьям"]},
+ sales:{i:"▼",t:"Продажи и воронка",from:["b24","amo","1c","gs"],d:"Сколько заявок дошло до оплаты, где воронка теряет сделки и сколько денег в ней лежит.",ul:["Воронка от заявки до оплаты","Сделки и суммы на каждом этапе","Доля, которая доходит до денег"]},
+ debt:{i:"⏱",t:"Долги и сроки",from:["1c","bank","gs"],d:"Кто должен вам и кому должны вы, по каким срокам.",ul:["Дебиторская и кредиторская задолженность","Просрочка по срокам","Ближайшие платежи и налоги"]},
+ docs:{i:"▤",t:"Договоры и документы",from:["1c"],d:"Где нет скана договора, где дубли и где договор не совпадает с платежом.",ul:["Покрытие договоров сканами по видам","Дубли и опечатки с рекомендацией","Расхождения договора и платежа"]},
+ clients:{i:"✉",t:"Заявки и ответы клиентам",from:["bot","b24","amo"],d:"Бот в Telegram или ВК принимает заявки и отвечает на типовые вопросы. Заявки видны в дашборде.",ul:["Приём заявок ботом","Ответы на типовые вопросы","Число заявок по дням и источникам"]}
+};
+var N={"1c":"1С",b24:"Битрикс24",amo:"amoCRM",bank:"Банк",gs:"Таблицы",bot:"Telegram, ВК"};
+function sel(id){return [].slice.call(document.querySelectorAll("#"+id+" input:checked")).map(function(x){return x.value})}
+function draw(){
+ var s=sel("src"),g=sel("goal"),o=document.getElementById("out"),h="";
+ if(!g.length){o.innerHTML='<div class="empty">Отметьте, что хотите видеть, и здесь появится состав дашборда.</div>';return}
+ h+='<h3>Ваш дашборд: '+g.length+' '+(g.length==1?"блок":g.length<5?"блока":"блоков")+'</h3><p class="hint">Источники: '+(s.length?s.map(function(x){return N[x]}).join(", "):"пока не выбраны")+'</p>';
+ g.forEach(function(k,n){var d=G[k],have=d.from.filter(function(x){return s.indexOf(x)>-1}),ok=have.length>0;
+  h+='<details class="blk"'+(n==0?" open":"")+'><summary><i>'+d.i+'</i>'+d.t+'<em>'+(ok?"из: "+have.map(function(x){return N[x]}).join(", "):"нужен источник")+'</em></summary><div><p>'+d.d+'</p><ul>'+d.ul.map(function(u){return "<li>"+u+"</li>"}).join("")+'</ul><p class="src">'+(ok?"Данные берём из ваших источников":"Подойдёт: "+d.from.map(function(x){return N[x]}).join(", "))+'</p></div></details>'});
+ h+='<div class="cta"><a class="btn g" href="#kontakty">Обсудить мой дашборд</a></div><p class="hint" style="margin-top:12px">Это ориентир. Точный состав обсудим по вашим данным.</p>';
+ o.innerHTML=h}
+document.getElementById("src").addEventListener("change",draw);document.getElementById("goal").addEventListener("change",draw);draw();
 })();
 </script>
 </body>
