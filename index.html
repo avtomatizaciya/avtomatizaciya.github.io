@@ -130,13 +130,47 @@ footer{padding:28px 0 56px;color:var(--mut);font-size:14px}
 .rv{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.chart i{transition:none}html{scroll-behavior:auto}}
+
+/* фон: аврора, сетка, зерно */
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg::before{content:"";position:absolute;inset:0;background-image:radial-gradient(color-mix(in srgb,var(--tx) 14%,transparent) 1px,transparent 1.2px);background-size:26px 26px;-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000,transparent 75%);mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000,transparent 75%)}
+.bg b{position:absolute;border-radius:50%;filter:blur(90px);opacity:.45;will-change:transform;animation:drift 22s ease-in-out infinite alternate}
+.bg b:nth-child(1){width:520px;height:520px;background:#34d399;left:-120px;top:-140px}
+.bg b:nth-child(2){width:600px;height:600px;background:#60a5fa;right:-160px;top:40px;animation-duration:28s;animation-delay:-6s}
+.bg b:nth-child(3){width:440px;height:440px;background:#fb923c;left:30%;top:420px;opacity:.28;animation-duration:32s;animation-delay:-12s}
+@media(prefers-color-scheme:dark){.bg b{opacity:.22}.bg b:nth-child(3){opacity:.14}}
+@keyframes drift{to{transform:translate3d(60px,50px,0) scale(1.12)}}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+section.alt{background:color-mix(in srgb,var(--bg2) 70%,transparent);backdrop-filter:blur(6px)}
+/* стекло и подсветка за курсором */
+.dash{background:color-mix(in srgb,var(--card) 78%,transparent);backdrop-filter:blur(18px);border-color:color-mix(in srgb,var(--line) 70%,#fff);box-shadow:0 40px 80px -30px rgba(37,99,235,.35),0 0 0 1px rgba(255,255,255,.4) inset;animation:float 7s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px)}}
+.spot{position:relative;overflow:hidden}
+.spot::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(52,211,153,.22),transparent 55%);opacity:0;transition:opacity .25s;pointer-events:none}
+.spot:hover::before{opacity:1}
+.why div,.calc,.frame,.final{position:relative}
+.why div{border:1px solid color-mix(in srgb,var(--line) 60%,transparent);backdrop-filter:blur(4px)}
+.calc{background:color-mix(in srgb,var(--card) 80%,transparent);backdrop-filter:blur(8px)}
+.btn:not(.o):not(.s){box-shadow:0 10px 26px -10px rgba(22,163,74,.55)}
+.btn.g{background:linear-gradient(120deg,var(--g),var(--b));border-color:transparent;color:#fff}
+h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margin-top:14px;background:linear-gradient(90deg,var(--g),var(--b),var(--o))}
+.final{background:radial-gradient(900px 300px at 20% 0%,rgba(52,211,153,.35),transparent 60%),radial-gradient(800px 320px at 90% 100%,rgba(96,165,250,.35),transparent 60%),var(--tx);overflow:hidden}
+.final h2::after{margin:14px auto 0}
+/* бегущая строка */
+.marq{overflow:hidden;border-block:1px solid var(--line);background:color-mix(in srgb,var(--card) 60%,transparent);padding:14px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq div{display:flex;gap:40px;width:max-content;animation:mq 38s linear infinite;color:var(--mut);font-weight:650;font-size:15px;letter-spacing:.02em;white-space:nowrap}
+.marq span::before{content:"✦";color:var(--g);margin-right:40px}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mail{display:inline-flex;align-items:center;gap:8px}
+@media(prefers-reduced-motion:reduce){.bg b,.dash,.marq div{animation:none}}
 </style>
 </head>
 <body>
+<div class="bg" aria-hidden="true"><b></b><b></b><b></b></div><div class="grain" aria-hidden="true"></div>
 <nav class="top"><div class="w">
 <a class="logo" href="#"><i></i>Автоматизация</a>
 <div class="links"><a href="#produkty">Обработки 1С</a><a href="#dashbordy">Дашборды</a><a href="#kalkulyatory">Калькуляторы</a><a href="#kak">Как работаю</a></div>
-<a class="btn s" href="https://vk.ru/pyankov_vv">Написать</a>
+<a class="btn s g" href="#kontakty">Написать</a>
 </div></nav>
 
 <header class="hero"><div class="w">
@@ -157,15 +191,16 @@ footer{padding:28px 0 56px;color:var(--mut);font-size:14px}
 <div class="cap"><span>сен</span><span>выручка по месяцам</span><span>авг</span></div>
 </div>
 </div></header>
+<div class="marq" aria-hidden="true"><div><span>1С:Бухгалтерия</span><span>Банковские выписки</span><span>ЭДО</span><span>Google Таблицы</span><span>Платёжные поручения</span><span>Сверки</span><span>Telegram и ВК</span><span>Дашборды</span><span>Управленческая отчётность</span><span>1С:Бухгалтерия</span><span>Банковские выписки</span><span>ЭДО</span><span>Google Таблицы</span><span>Платёжные поручения</span><span>Сверки</span><span>Telegram и ВК</span><span>Дашборды</span><span>Управленческая отчётность</span></div></div>
 
 <section class="alt"><div class="w">
 <p class="k rv">Что это даёт</p>
 <h2 class="rv">Автоматизация нужна, чтобы зарабатывать, а не чтобы было красиво</h2>
 <p class="sub rv">Три вещи, которые собственник замечает первыми.</p>
 <div class="why rv">
-<div><b>Меньше расходов</b><span>Бухгалтер и менеджеры не набивают то, что можно собрать само: платёжки, выписки, сверки.</span></div>
-<div><b>Быстрее</b><span>Счёт поставщика превращается в платёжку и готовый файл для банка за минуты, а не за день.</span></div>
-<div><b>Видно всё</b><span>Деньги, долги и прибыль на одном экране с телефона, без «пришлите мне отчёт».</span></div>
+<div class="spot"><b>Меньше расходов</b><span>Бухгалтер и менеджеры не набивают то, что можно собрать само: платёжки, выписки, сверки.</span></div>
+<div class="spot"><b>Быстрее</b><span>Счёт поставщика превращается в платёжку и готовый файл для банка за минуты, а не за день.</span></div>
+<div class="spot"><b>Видно всё</b><span>Деньги, долги и прибыль на одном экране с телефона, без «пришлите мне отчёт».</span></div>
 </div>
 </div></section>
 
@@ -211,10 +246,10 @@ footer{padding:28px 0 56px;color:var(--mut);font-size:14px}
 <h2 class="rv">Калькуляторы, которыми можно пользоваться сразу</h2>
 <p class="sub rv">Работают в браузере и на телефоне, без регистрации. Расчёты по нормам 2026 года.</p>
 <div class="calcs rv">
-<a class="calc" href="https://kalkulyator-yurista.github.io/"><small>Юристам</small><b>Госпошлина в суд</b><span>Общая юрисдикция и арбитраж, плюс калькулятор дробей одной строкой.</span><em>Открыть →</em></a>
-<a class="calc" href="https://kalkulyator-nalogov.github.io/"><small>ИП и самозанятым</small><b>Какой налоговый режим выгоднее</b><span>НПД, УСН, патент и ОСН по вашим цифрам.</span><em>Открыть →</em></a>
-<a class="calc" href="https://kalkulyator-soc-kontrakta.github.io/"><small>Начинающим бизнес</small><b>Соцконтракт 350 000 ₽</b><span>Проверка права на выплату и смета в лимитах закона.</span><em>Открыть →</em></a>
-<a class="calc" href="https://kalkulyator-mastera.github.io/"><small>Бьюти-мастерам</small><b>Рентабельность услуг</b><span>Себестоимость каждой услуги, прибыль и рентабельность кабинета.</span><em>Открыть →</em></a>
+<a class="calc spot" href="https://kalkulyator-yurista.github.io/"><small>Юристам</small><b>Госпошлина в суд</b><span>Общая юрисдикция и арбитраж, плюс калькулятор дробей одной строкой.</span><em>Открыть →</em></a>
+<a class="calc spot" href="https://kalkulyator-nalogov.github.io/"><small>ИП и самозанятым</small><b>Какой налоговый режим выгоднее</b><span>НПД, УСН, патент и ОСН по вашим цифрам.</span><em>Открыть →</em></a>
+<a class="calc spot" href="https://kalkulyator-soc-kontrakta.github.io/"><small>Начинающим бизнес</small><b>Соцконтракт 350 000 ₽</b><span>Проверка права на выплату и смета в лимитах закона.</span><em>Открыть →</em></a>
+<a class="calc spot" href="https://kalkulyator-mastera.github.io/"><small>Бьюти-мастерам</small><b>Рентабельность услуг</b><span>Себестоимость каждой услуги, прибыль и рентабельность кабинета.</span><em>Открыть →</em></a>
 </div>
 </div></section>
 
@@ -240,13 +275,13 @@ footer{padding:28px 0 56px;color:var(--mut);font-size:14px}
 </div>
 </div></section>
 
-<section style="padding-top:0"><div class="w"><div class="final rv">
+<section id="kontakty" style="padding-top:0"><div class="w"><div class="final rv">
 <h2>Расскажите, что отнимает время</h2>
 <p>Напишите одним сообщением, и я отвечу, что из этого можно убрать.</p>
-<div class="cta" style="justify-content:center"><a class="btn" href="https://vk.ru/pyankov_vv">Написать во ВКонтакте</a><a class="btn o" href="#produkty">Смотреть решения</a></div>
+<div class="cta" style="justify-content:center"><a class="btn" href="https://vk.ru/pyankov_vv">Написать во ВКонтакте</a><a class="btn o mail" href="mailto:pyankov.v.v@mail.ru">✉ pyankov.v.v@mail.ru</a></div>
 </div></div></section>
 
-<footer><div class="w">Обработки для 1С распространяются через Инфостарт, калькуляторы бесплатные. Расчёты носят справочный характер.</div></footer>
+<footer><div class="w">Контакты: <a href="https://vk.ru/pyankov_vv">ВКонтакте</a> · <a href="mailto:pyankov.v.v@mail.ru">pyankov.v.v@mail.ru</a><br>Обработки для 1С распространяются через Инфостарт, калькуляторы бесплатные. Расчёты носят справочный характер.</div></footer>
 
 <script>
 (function(){
@@ -257,6 +292,7 @@ function bars(){c.querySelectorAll("i").forEach(function(i,k){setTimeout(functio
 function count(el){var t=parseFloat(el.dataset.n),d=+el.dataset.d,s=el.dataset.s||"";if(reduce){el.textContent=t.toFixed(d).replace(".",",")+s;return}var st=performance.now();(function f(n){var p=Math.min((n-st)/1100,1);el.textContent=(t*(1-Math.pow(1-p,3))).toFixed(d).replace(".",",")+s;if(p<1)requestAnimationFrame(f)})(st)}
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;e.target.classList.add("in");if(e.target.classList.contains("dash")){bars();e.target.querySelectorAll("[data-n]").forEach(count)}io.unobserve(e.target)})},{threshold:.15});
 document.querySelectorAll(".rv").forEach(function(el){io.observe(el)});
+document.addEventListener("pointermove",function(e){var s=e.target.closest&&e.target.closest(".spot");if(!s)return;var r=s.getBoundingClientRect();s.style.setProperty("--mx",(e.clientX-r.left)+"px");s.style.setProperty("--my",(e.clientY-r.top)+"px")});
 })();
 </script>
 </body>
