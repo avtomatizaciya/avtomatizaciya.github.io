@@ -192,6 +192,33 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margi
 .blk div .src{font-size:13px;color:var(--b);font-weight:600}
 .empty{color:var(--mut);padding:30px 6px;text-align:center}
 .out .cta{margin-top:14px}
+
+/* главная-панель (скилл financial-dashboards, 19.10.2026) */
+.pnl{max-width:1240px;margin:0 auto;padding:12px 20px 6px}
+.verdict{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--b);border-radius:12px;padding:8px 14px;font-size:14.5px;line-height:1.4;margin:0 0 10px}.verdict b{color:var(--b)}
+.tiles{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
+.t{grid-column:span 3;display:flex;flex-direction:column;gap:6px;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--b);border-radius:16px;padding:12px 16px 10px;color:var(--tx);text-decoration:none;min-height:160px;transition:transform .15s,border-color .15s}
+.t:nth-child(n+5){grid-column:span 4}.t:hover{transform:translateY(-2px);border-color:var(--b)}
+.t.g{border-top-color:var(--g)}.t.o{border-top-color:var(--o)}
+.t .q{font-weight:700;font-size:15px;display:flex;justify-content:space-between;gap:8px}.t .q i{font-style:normal;color:var(--mut);font-weight:400}
+.t .v{font-size:30px;font-weight:800;line-height:1.05;letter-spacing:-.02em;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.t .v small{font-size:13px;font-weight:500;color:var(--mut)}
+.t .vis{flex:1;display:flex;align-items:center;min-height:38px}
+.t .n{font-size:12.5px;color:var(--mut);line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.t .go{color:var(--b);font-weight:700;font-size:13px}
+.mini{display:flex;gap:3px;align-items:end;height:36px;width:100%}.mini i{flex:1;border-radius:3px 3px 0 0;background:var(--b);opacity:.85}.mini i:nth-child(odd){background:var(--o);opacity:.55}
+.chipz{display:flex;flex-wrap:wrap;gap:5px}.chipz span{font-size:11.5px;padding:3px 9px;border-radius:999px;background:var(--bs);color:var(--b);font-weight:600}
+.nums{display:flex;gap:6px}.nums b{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;background:var(--b)}.nums b:nth-child(2n){background:var(--g)}
+.icons{display:flex;gap:4px;font-size:20px;flex-wrap:wrap}
+.gain{display:grid;gap:4px;width:100%}.gain div{display:grid;grid-template-columns:92px 1fr;gap:8px;align-items:center;font-size:11.5px;color:var(--mut)}.gain i{display:block;height:9px;border-radius:5px;background:var(--g)}
+.stepsmini{display:flex;align-items:center;gap:6px;width:100%;font-size:11.5px;color:var(--mut)}.stepsmini b{width:26px;height:26px;border-radius:50%;background:var(--bs);color:var(--b);display:flex;align-items:center;justify-content:center;font-size:12px;flex:none}.stepsmini s{text-decoration:none;flex:1;height:2px;background:var(--line)}
+.tgm{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--mut)}.tgm b{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#2aabee;color:#fff;font-size:18px}
+@media(max-width:1000px){.t,.t:nth-child(n+5){grid-column:span 6}}@media(max-width:600px){.t,.t:nth-child(n+5){grid-column:span 12;min-height:0}.pnl{padding:10px 15px}}
+.view{display:block}.js .view{display:none}.js .view.on{display:block}.js .home.off{display:none}
+.vb{max-width:1240px;margin:8px auto 0;padding:0 20px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mut);position:relative;z-index:2}.view>.w{padding-top:0}.view{padding-top:14px}.vb .back{border:0;background:var(--b);color:#fff;border-radius:999px;padding:7px 14px;font-weight:700;font-size:13px;cursor:pointer}.vb a{color:var(--b)}
+.js .vb{display:none}.js .view.on .vb{display:flex}
+.demos{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+nav.top .links a.on{color:var(--b);font-weight:700}
+footer{padding-top:8px}
 </style>
 <link rel="stylesheet" href="telegram-contact.css">
 <script src="telegram-contact.js" defer></script>
@@ -199,43 +226,16 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margi
 <body>
 <div class="bg" aria-hidden="true"><b></b><b></b><b></b></div><div class="grain" aria-hidden="true"></div>
 <nav class="top"><div class="w">
-<a class="logo" href="#"><i></i>Автоматизация</a>
-<div class="links"><a href="#konstruktor">Конструктор</a><a href="#dashbordy">Дашборды</a><a href="#produkty">Обработки 1С</a><a href="#kalkulyatory">Калькуляторы</a><a href="#kak">Как работаю</a></div>
-<a class="btn s g" href="#kontakty">Написать</a>
+<a class="logo" href="#view=home"><i></i>Автоматизация</a>
+<div class="links"><a href="#view=dashbordy" data-nav="dashbordy">Дашборды</a><a href="#view=konstruktor" data-nav="konstruktor">Конструктор</a><a href="#view=produkty" data-nav="produkty">Обработки 1С</a><a href="#view=besplatno" data-nav="besplatno">Бесплатно</a><a href="#view=kak" data-nav="kak">Как работаю</a></div>
+<a class="btn s g" href="#view=kontakty">Написать</a>
 </div></nav>
-
-<header class="hero"><div class="w">
-<div>
-<span class="eyebrow">● Дашборды и автоматизация для бизнеса</span>
-<h1>Цифры бизнеса <em>на одном экране</em>, а рутина сама</h1>
-<p class="lead">Собираю дашборды из 1С, Битрикс24, amoCRM, банка и таблиц, подключаю ботов и убираю ручную работу. Меньше расходов, быстрее решения, больше прибыли.</p>
-<div class="cta"><a class="btn" href="#konstruktor">Собрать свой дашборд</a><a class="btn o" href="#dashbordy">Посмотреть пример</a></div>
-</div>
-<div class="dash rv" aria-label="Пример панели руководителя">
-<div class="bar"><span></span><span></span><span></span><small>пример, данные вымышленные</small></div>
-<div class="kpis">
-<div class="kpi g"><small>Выручка за август</small><b data-n="4.1" data-d="1" data-s=" млн">0</b></div>
-<div class="kpi b"><small>Деньги на счетах</small><b data-n="5.1" data-d="1" data-s=" млн">0</b></div>
-<div class="kpi o"><small>Нам должны</small><b data-n="3.6" data-d="1" data-s=" млн">0</b></div>
-</div>
-<div class="chart" id="chart"></div>
-<div class="cap"><span>сен</span><span>выручка по месяцам</span><span>авг</span></div>
-</div>
-</div></header>
-<div class="marq" aria-hidden="true"><div><span>Дашборды</span><span>Битрикс24</span><span>amoCRM</span><span>1С</span><span>Банк и выписки</span><span>Google Таблицы</span><span>Excel</span><span>Telegram</span><span>ВКонтакте</span><span>Боты и ИИ-агенты</span><span>Платёжные поручения</span><span>Сверки</span><span>Управленческая отчётность</span><span>Дашборды</span><span>Битрикс24</span><span>amoCRM</span><span>1С</span><span>Банк и выписки</span><span>Google Таблицы</span><span>Excel</span><span>Telegram</span><span>ВКонтакте</span><span>Боты и ИИ-агенты</span><span>Платёжные поручения</span><span>Сверки</span><span>Управленческая отчётность</span></div></div>
-
-<section class="alt"><div class="w">
-<p class="k rv">Что это даёт</p>
-<h2 class="rv">Автоматизация нужна, чтобы зарабатывать, а не чтобы было красиво</h2>
-<p class="sub rv">Три вещи, которые собственник замечает первыми.</p>
-<div class="why rv">
-<div class="spot"><b>Меньше расходов</b><span>Бухгалтер и менеджеры не набивают то, что можно собрать само: платёжки, выписки, сверки.</span></div>
-<div class="spot"><b>Быстрее</b><span>Счёт поставщика превращается в платёжку и готовый файл для банка за минуты, а не за день.</span></div>
-<div class="spot"><b>Видно всё</b><span>Деньги, долги и прибыль на одном экране с телефона, без «пришлите мне отчёт».</span></div>
-</div>
-</div></section>
-
-<section id="konstruktor"><div class="w">
+<main class="home pnl" id="home">
+<p class="verdict"><b>Главное:</b> цифры бизнеса на одном экране с телефона, а рутина собирается сама. 7 демо-панелей, 4 готовые обработки 1С, 7 бесплатных калькуляторов и разбор ЗСК - всё открывается без входа и установки.</p>
+<div class="tiles"><a class="t " href="#view=dashbordy" data-view="dashbordy" data-tile><span class="q">Что увидит собственник?<i>›</i></span><span class="v">7<small>демо-панелей</small></span><span class="vis"><div class="mini"><i style="height:55%"></i><i style="height:60%"></i><i style="height:68%"></i><i style="height:82%"></i><i style="height:44%"></i><i style="height:63%"></i><i style="height:74%"></i><i style="height:79%"></i><i style="height:67%"></i><i style="height:84%"></i><i style="height:91%"></i><i style="height:96%"></i></div></span><span class="n">Деньги, долги и прибыль на одном экране с телефона, за 3 клика до документа. Данные примеров вымышленные.</span><span class="go">Открыть →</span></a><a class="t " href="#view=konstruktor" data-view="konstruktor" data-tile><span class="q">Откуда данные?<i>›</i></span><span class="v">6<small>источников</small></span><span class="vis"><div class="chipz"><span>1С</span><span>Битрикс24</span><span>amoCRM</span><span>Банк и выписки</span><span>Google Таблицы, Excel</span><span>Telegram, ВК, боты</span></div></span><span class="n">Данные остаются там, где лежат. Отметьте источники и блоки - сразу увидите состав своего дашборда.</span><span class="go">Открыть →</span></a><a class="t " href="#view=produkty" data-view="produkty" data-tile><span class="q">Что готово для 1С?<i>›</i></span><span class="v">4<small>обработки</small></span><span class="vis"><div class="nums"><b>1</b><b>2</b><b>3</b><b>4</b></div></span><span class="n">Отчёт директору, управленческие отчёты в таблицы, контроль договоров, проценты по займам. Конфигурацию не меняют.</span><span class="go">Открыть →</span></a><a class="t g" href="#view=besplatno" data-view="besplatno" data-tile><span class="q">Чем пользоваться бесплатно?<i>›</i></span><span class="v">7<small>калькуляторов</small></span><span class="vis"><div class="icons">💳⚖️🧾🤝💅📑✉️</div></span><span class="n">Долги, госпошлина, налоговый режим, соцконтракт, себестоимость услуг, банкротство; плюс разбор ЗСК. Без регистрации.</span><span class="go">Открыть →</span></a><a class="t g" href="#view=vygody" data-view="vygody" data-tile><span class="q">Что это даёт?<i>›</i></span><span class="v">3<small>выгоды</small></span><span class="vis"><div class="gain"><div>расходы<i style="width:55%"></i></div><div>скорость<i style="width:85%"></i></div><div>видимость<i style="width:100%"></i></div></div></span><span class="n">Меньше ручной работы у бухгалтера, платёжки за минуты, цифры без «пришлите отчёт».</span><span class="go">Открыть →</span></a><a class="t " href="#view=kak" data-view="kak" data-tile><span class="q">Как работаю?<i>›</i></span><span class="v">3<small>шага</small></span><span class="vis"><div class="stepsmini"><b>1</b><s></s><b>2</b><s></s><b>3</b></div></span><span class="n">Вы описываете рутину, я показываю решение на примере, затем внедряю и остаюсь на связи.</span><span class="go">Открыть →</span></a><a class="t o" href="#view=kontakty" data-view="kontakty" data-tile><span class="q">С чего начать?<i>›</i></span><span class="v">1<small>сообщение</small></span><span class="vis"><div class="tgm"><b>✈</b>Telegram с готовым черновиком, без паспортов и договоров</div></span><span class="n">Напишите, что отнимает время. Отвечу, что из этого можно убрать и как это будет выглядеть.</span><span class="go">Открыть →</span></a></div>
+</main>
+<section class="view" id="dashbordy" data-view="dashbordy"><div class="vb"><button class="back" type="button" data-back>‹ Назад</button><a href="#view=home">Главная</a><span>›</span><span>Дашборды</span></div><div class="w"><p class="k">Дашборды</p><h2>Цифры бизнеса на одном экране</h2><p class="sub">Семь демо-панелей на вымышленных данных. Открываются на телефоне, без входа и установки. Каждая: до 7 плиток-вопросов, фильтры в шапке, спуск до документа.</p><div class="demos"><a class="calc spot" href="https://avtomatizaciya.github.io/panel-prodazh-demo/#per=month" rel="noopener"><small>демо, данные вымышленные</small><b>Панель управления бизнесом</b><span>7 плиток: деньги, выручка, прибыль, долги, план-факт, налоги, тревоги. Период, отрасль и юрлицо в шапке.</span><em>Открыть →</em></a><a class="calc spot" href="https://avtomatizaciya.github.io/panel-saby-demo/" rel="noopener"><small>демо, данные вымышленные</small><b>Руководитель бухгалтерского аутсорса</b><span>7 вкладок по 7 плиток на данных СБИС: клиенты, налоговая, нагрузка, учёт, касса и бюджеты, планирование, подсказки клиентам.</span><em>Открыть →</em></a><a class="calc spot" href="https://avtomatizaciya.github.io/panel-buhfirma-demo/" rel="noopener"><small>демо, данные вымышленные</small><b>Панель бухфирмы</b><span>Клиенты, сроки сдачи, требования ФНС и долги на одном экране.</span><em>Открыть →</em></a><a class="calc spot" href="https://avtomatizaciya.github.io/panel-mostabak/" rel="noopener"><small>демо, данные вымышленные</small><b>Сеть табачных точек</b><span>Выручка по точкам, календарь продаж, treemap товаров, что проверить сегодня.</span><em>Открыть →</em></a><a class="calc spot" href="https://avtomatizaciya.github.io/panel-zakupshchika/" rel="noopener"><small>демо, данные вымышленные</small><b>Панель закупщика</b><span>Закупки медицинского оборудования: лоты, заказчики, сроки, свёрнутые подменю и поиск.</span><em>Открыть →</em></a><a class="calc spot" href="https://avtomatizaciya.github.io/geo-review/" rel="noopener"><small>демо, данные вымышленные</small><b>Ярославль: проверка торговли</b><span>Карта точек и проверка торговли по открытым данным города.</span><em>Открыть →</em></a><a class="calc spot" href="https://valeraslim86-afk.github.io/showroom/upravlenie.html" rel="noopener"><small>демо, данные вымышленные</small><b>Управленческий отчёт и реестр договоров</b><span>Выручка, деньги, долги и движение по месяцам; отдельно реестр договоров с проверкой сканов.</span><em>Открыть →</em></a></div></div></section>
+<section class="view" id="konstruktor" data-view="konstruktor"><div class="vb"><button class="back" type="button" data-back>‹ Назад</button><a href="#view=home">Главная</a><span>›</span><span>Конструктор</span></div><section id="konstruktor"><div class="w">
 <p class="k rv">Конструктор</p>
 <h2 class="rv">Отметьте, откуда данные и что хотите видеть</h2>
 <p class="sub rv">Справа появится, какие блоки можно собрать. Нажмите на блок, чтобы раскрыть подробности.</p>
@@ -259,21 +259,8 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margi
 </div>
 <div class="out" id="out" aria-live="polite"></div>
 </div>
-</div></section>
-
-
-<section class="alt" id="dashbordy"><div class="w show">
-<div class="rv">
-<p class="k">Дашборды</p>
-<h2>Цифры бизнеса на одном экране</h2>
-<p class="sub" style="margin-bottom:22px">Открываются на телефоне, без входа и установки программ. Данные остаются там, где они есть: в 1С, таблицах или банке.</p>
-<ul class="pills"><li>Выручка и прибыль</li><li>Движение денег</li><li>Расходы по статьям</li><li>Воронка продаж</li><li>Реестр договоров</li></ul>
-<div class="cta"><a class="btn" href="https://valeraslim86-afk.github.io/showroom/upravlenie.html">Открыть пример</a><a class="btn o" href="https://valeraslim86-afk.github.io/showroom/dogovory.html">Реестр договоров</a></div>
-<p style="color:var(--mut);font-size:14px;margin-top:16px">Компании и суммы в примерах вымышленные.</p>
-</div>
-<div class="frame rv"><div class="bar"><span></span><span></span><span></span></div><a class="view" href="https://valeraslim86-afk.github.io/showroom/upravlenie.html" style="display:block"><img src="img/upravlenie-pc.png" alt="Пример управленческого дашборда" loading="lazy"></a></div>
-</div></section>
-<section id="produkty"><div class="w">
+</div></section></section>
+<section class="view" id="produkty" data-view="produkty"><div class="vb"><button class="back" type="button" data-back>‹ Назад</button><a href="#view=home">Главная</a><span>›</span><span>Обработки 1С</span></div><div class="w">
 <p class="k rv">Если вы работаете в 1С</p>
 <h2 class="rv">Готовые обработки для 1С</h2>
 <p class="sub rv">Внешние обработки не меняют конфигурацию. Откройте строку, чтобы увидеть, что внутри.</p>
@@ -297,7 +284,7 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margi
 
 </div>
 </div></section>
-<section class="alt" id="kalkulyatory"><div class="w">
+<section class="view" id="besplatno" data-view="besplatno"><div class="vb"><button class="back" type="button" data-back>‹ Назад</button><a href="#view=home">Главная</a><span>›</span><span>Бесплатно</span></div><div class="w">
 <p class="k rv">Бесплатно</p>
 <h2 class="rv">Калькуляторы, которыми можно пользоваться сразу</h2>
 <p class="sub rv">Работают в браузере и на телефоне, без регистрации. Расчёты по нормам 2026 года.</p>
@@ -312,17 +299,18 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margi
 <a class="calc spot" href="https://yurist-yaroslavl.github.io/"><small>Юридическая помощь</small><b>Компенсация и сроки подачи</b><span>Неустойка за задержку зарплаты по ст. 236 ТК и последний день для жалобы или иска. Telegram с готовым сообщением.</span><em>Открыть →</em></a>
 <!-- calcs:end -->
 </div>
+<div class="w" style="padding-top:18px"><p class="k">Разбор для бизнеса</p><h2>Если банк ограничил работу со счётом</h2><div class="calcs rv"><a class="calc spot" href="https://razbor-zsk.github.io/?from=portfolio"><small>Для ООО и ИП</small><b>Красная группа ЗСК: что делать</b><span>Как выбрать порядок обращения в банк, ЦБ или МВК, проверить сроки и собрать документы.</span><em>Читать разбор →</em></a></div></div></section>
+<section class="view" id="vygody" data-view="vygody"><div class="vb"><button class="back" type="button" data-back>‹ Назад</button><a href="#view=home">Главная</a><span>›</span><span>Что это даёт</span></div><div class="w">
+<p class="k rv">Что это даёт</p>
+<h2 class="rv">Автоматизация нужна, чтобы зарабатывать, а не чтобы было красиво</h2>
+<p class="sub rv">Три вещи, которые собственник замечает первыми.</p>
+<div class="why rv">
+<div class="spot"><b>Меньше расходов</b><span>Бухгалтер и менеджеры не набивают то, что можно собрать само: платёжки, выписки, сверки.</span></div>
+<div class="spot"><b>Быстрее</b><span>Счёт поставщика превращается в платёжку и готовый файл для банка за минуты, а не за день.</span></div>
+<div class="spot"><b>Видно всё</b><span>Деньги, долги и прибыль на одном экране с телефона, без «пришлите мне отчёт».</span></div>
+</div>
 </div></section>
-
-
-<section id="razbory"><div class="w">
-<p class="k rv">Разборы для бизнеса</p>
-<h2 class="rv">Если банк ограничил работу со счётом</h2>
-<p class="sub rv">Понятный порядок действий и официальные источники.</p>
-<div class="calcs rv"><a class="calc spot" href="https://razbor-zsk.github.io/?from=portfolio"><small>Для ООО и ИП</small><b>Красная группа ЗСК: что делать</b><span>Как выбрать порядок обращения в банк, ЦБ или МВК, проверить сроки и собрать документы.</span><em>Читать разбор →</em></a></div>
-</div></section>
-
-<section id="kak"><div class="w">
+<section class="view" id="kak" data-view="kak"><div class="vb"><button class="back" type="button" data-back>‹ Назад</button><a href="#view=home">Главная</a><span>›</span><span>Как работаю</span></div><div class="w">
 <p class="k rv">Как работаю</p>
 <h2 class="rv">Три шага от боли до результата</h2>
 <p class="sub rv"></p>
@@ -331,27 +319,16 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margi
 <div class="step"><b>Показываю решение</b><span>Готовая обработка или дашборд на примере. Вы видите, как это будет выглядеть, до начала работы.</span></div>
 <div class="step"><b>Внедряю и сопровождаю</b><span>Подключаю к вашей базе и проверяю на ваших данных, затем остаюсь на связи.</span></div>
 </div>
-</div></section>
-
-<section><div class="w">
-<p class="k rv">Вопросы</p>
-<h2 class="rv">Что обычно спрашивают</h2>
-<div class="faq rv" style="margin-top:28px">
-<details><summary>Нужно ли менять конфигурацию 1С?</summary><p>Нет. Внешние обработки подключаются как обычный файл, конфигурацию они не меняют.</p></details>
-<details><summary>Что делать, если нужно под мою задачу?</summary><p>Напишите, что забирает время. Часть задач закрывается готовыми обработками, часть собирается под вас.</p></details>
-<details><summary>Куда уходят мои данные?</summary><p>Дашборды собираются из данных там, где они уже лежат: 1С, Google Таблицы, банк. В примерах на этой странице данные вымышленные.</p></details>
-<details><summary>Можно сначала посмотреть?</summary><p>Да. Примеры дашбордов и калькуляторы открываются без регистрации, обработки описаны на Инфостарте со скриншотами.</p></details>
-</div>
-</div></section>
-
-<section id="kontakty" style="padding-top:0"><div class="w"><div class="final rv">
+</div><div class="w"><div class="final rv">
 <h2>Расскажите, что отнимает время</h2>
 <p>Напишите одним сообщением, и я отвечу, что из этого можно убрать.</p>
 <div class="cta" style="justify-content:center"><a class="btn" href="https://t.me/pyankov_vv?text=%D0%9F%D0%B8%D1%88%D1%83%20%D1%81%D0%BE%20%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D1%8B%20%C2%AB%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE%3A%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%D1%8B%C2%BB.%0A%D0%A2%D0%B5%D0%BC%D0%B0%3A%20%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D0%B4%D0%B0%D1%88%D0%B1%D0%BE%D1%80%D0%B4%D1%8B.%0A%0A%D0%A7%D1%82%D0%BE%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%3A%20%0A%D0%93%D0%B4%D0%B5%20%D1%81%D0%B5%D0%B9%D1%87%D0%B0%D1%81%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5%3A%20%0A%D0%9C%D0%BE%D0%B9%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%3A%20">Написать в Telegram</a></div>
 </div></div></section>
-
-
-<section class="tg-first-message" aria-labelledby="tg-contact-title">
+<section class="view" id="kontakty" data-view="kontakty"><div class="vb"><button class="back" type="button" data-back>‹ Назад</button><a href="#view=home">Главная</a><span>›</span><span>Написать</span></div><div class="w"><div class="final rv">
+<h2>Расскажите, что отнимает время</h2>
+<p>Напишите одним сообщением, и я отвечу, что из этого можно убрать.</p>
+<div class="cta" style="justify-content:center"><a class="btn" href="https://t.me/pyankov_vv?text=%D0%9F%D0%B8%D1%88%D1%83%20%D1%81%D0%BE%20%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D1%8B%20%C2%AB%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE%3A%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%D1%8B%C2%BB.%0A%D0%A2%D0%B5%D0%BC%D0%B0%3A%20%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D0%B4%D0%B0%D1%88%D0%B1%D0%BE%D1%80%D0%B4%D1%8B.%0A%0A%D0%A7%D1%82%D0%BE%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%3A%20%0A%D0%93%D0%B4%D0%B5%20%D1%81%D0%B5%D0%B9%D1%87%D0%B0%D1%81%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5%3A%20%0A%D0%9C%D0%BE%D0%B9%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%3A%20">Написать в Telegram</a></div>
+</div></div><section class="tg-first-message" aria-labelledby="tg-contact-title">
 <h2 id="tg-contact-title">Разобрать ситуацию с человеком</h2>
 <a class="tg-button" href="https://t.me/pyankov_vv?text=%D0%9F%D0%B8%D1%88%D1%83%20%D1%81%D0%BE%20%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D1%8B%20%C2%AB%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE%3A%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%D1%8B%C2%BB.%0A%D0%A2%D0%B5%D0%BC%D0%B0%3A%20%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D0%B4%D0%B0%D1%88%D0%B1%D0%BE%D1%80%D0%B4%D1%8B.%0A%0A%D0%A7%D1%82%D0%BE%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%3A%20%0A%D0%93%D0%B4%D0%B5%20%D1%81%D0%B5%D0%B9%D1%87%D0%B0%D1%81%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5%3A%20%0A%D0%9C%D0%BE%D0%B9%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%3A%20" rel="noopener">Написать в Telegram</a>
 <p>Откроется чат с @pyankov_vv и черновик по теме «Автоматизация и дашборды». Допишите свои данные и нажмите «Отправить».</p>
@@ -365,18 +342,29 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:4px;margi
 <button type="button" data-tg-copy hidden>Скопировать текст</button>
 <span class="tg-copy-status" role="status" aria-live="polite"></span>
 </details><p>Если Telegram не подставил текст, скопируйте его отсюда. Для первого сообщения не нужны паспортные данные или номера договоров.</p>
-</section>
+</section></section>
 <footer><div class="w">Контакты: <a href="https://t.me/pyankov_vv?text=%D0%9F%D0%B8%D1%88%D1%83%20%D1%81%D0%BE%20%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D1%8B%20%C2%AB%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE%3A%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%D1%8B%C2%BB.%0A%D0%A2%D0%B5%D0%BC%D0%B0%3A%20%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D0%B4%D0%B0%D1%88%D0%B1%D0%BE%D1%80%D0%B4%D1%8B.%0A%0A%D0%A7%D1%82%D0%BE%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%3A%20%0A%D0%93%D0%B4%D0%B5%20%D1%81%D0%B5%D0%B9%D1%87%D0%B0%D1%81%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5%3A%20%0A%D0%9C%D0%BE%D0%B9%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%3A%20">Написать в Telegram</a><br>Обработки для 1С распространяются через Инфостарт, калькуляторы бесплатные. Расчёты носят справочный характер.</div></footer>
-
+<script src="telegram-contact.js" defer></script>
+<script>
+document.documentElement.classList.add('js');
+(function(){
+var MAP={kalkulyatory:'besplatno',kontakty:'kontakty',konstruktor:'konstruktor',dashbordy:'dashbordy',produkty:'produkty',kak:'kak',razbory:'besplatno'};
+var VIEWS=['dashbordy','konstruktor','produkty','besplatno','vygody','kak','kontakty'];
+function current(){var h=location.hash.replace(/^#/,'');var m=/(?:^|&)view=([a-z]+)/.exec(h);var v=m?m[1]:(MAP[h]||'home');return VIEWS.indexOf(v)>-1?v:'home'}
+function render(){var v=current();document.getElementById('home').classList.toggle('off',v!=='home');document.querySelectorAll('.view').forEach(function(s){s.classList.toggle('on',s.dataset.view===v)});document.querySelectorAll('[data-nav]').forEach(function(a){a.classList.toggle('on',a.dataset.nav===v)});document.title=(v==='home'?'':({dashbordy:'Дашборды',konstruktor:'Конструктор',produkty:'Обработки 1С',besplatno:'Бесплатно',vygody:'Что это даёт',kak:'Как работаю',kontakty:'Написать'})[v]+' · ')+'Дашборды и автоматизация для бизнеса';window.scrollTo(0,0)}
+window.addEventListener('hashchange',render);render();
+document.addEventListener('click',function(e){if(e.target.closest('[data-back]')){if(history.length>1&&document.referrer===''){history.back()}else{location.hash='#view=home'}}});
+})();
+</script>
 <script>
 (function(){
 var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-var data=[2.4,2.6,2.9,3.5,1.9,2.7,3.2,3.4,2.9,3.6,3.9,4.1],c=document.getElementById("chart");
+var data=[2.4,2.6,2.9,3.5,1.9,2.7,3.2,3.4,2.9,3.6,3.9,4.1],c=document.getElementById("chart")||document.createElement("div");
 data.forEach(function(v){var i=document.createElement("i");i.dataset.h=Math.round(v/4.3*100);c.appendChild(i)});
 function bars(){c.querySelectorAll("i").forEach(function(i,k){setTimeout(function(){i.style.height=i.dataset.h+"%"},reduce?0:k*60)})}
 function count(el){var t=parseFloat(el.dataset.n),d=+el.dataset.d,s=el.dataset.s||"";if(reduce){el.textContent=t.toFixed(d).replace(".",",")+s;return}var st=performance.now();(function f(n){var p=Math.min((n-st)/1100,1);el.textContent=(t*(1-Math.pow(1-p,3))).toFixed(d).replace(".",",")+s;if(p<1)requestAnimationFrame(f)})(st)}
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;e.target.classList.add("in");if(e.target.classList.contains("dash")){bars();e.target.querySelectorAll("[data-n]").forEach(count)}io.unobserve(e.target)})},{threshold:.15});
-document.querySelectorAll(".rv").forEach(function(el){io.observe(el)});
+document.querySelectorAll(".rv").forEach(function(el){el.classList.add("in")});
 document.addEventListener("pointermove",function(e){var s=e.target.closest&&e.target.closest(".spot");if(!s)return;var r=s.getBoundingClientRect();s.style.setProperty("--mx",(e.clientX-r.left)+"px");s.style.setProperty("--my",(e.clientY-r.top)+"px")});
 
 var G={
@@ -399,5 +387,4 @@ function draw(){
 document.getElementById("src").addEventListener("change",draw);document.getElementById("goal").addEventListener("change",draw);draw();
 })();
 </script>
-</body>
-</html>
+</body></html>
