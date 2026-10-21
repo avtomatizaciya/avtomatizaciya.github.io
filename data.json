@@ -1,8 +1,8 @@
 {
- "date": "2026-10-20",
+ "date": "2026-10-21",
  "demos": 6,
  "processings": 11,
- "views": 3487,
+ "views": 3655,
  "downloads": 10,
  "calculators": 7,
  "weeks": [
@@ -36,7 +36,7 @@
   ],
   [
    "19.10.2026",
-   0
+   1
   ]
  ]
 }
