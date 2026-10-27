@@ -1,8 +1,8 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Прайс на автоматизацию</title><meta name="description" content="Что делаю по автоматизации: панели руководителя, доработки 1С, чат-боты, ИИ-звонки, интеграции CRM, сверка данных, сторожа. Цены и из чего они складываются.">
 <style>
-:root{--bg:#f4f4f1;--surf:#fff;--ink:#0b0b0b;--ink2:#52514e;--mut:#898781;--line:#e3e2dc;--accent:#1f4d3a;--soft:rgba(31,77,58,.08)}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#15171a;--surf:#1f2226;--ink:#f1f1ee;--ink2:#b8b7b2;--mut:#8b8a85;--line:#32363b;--accent:#5fb089;--soft:rgba(95,176,137,.12)}}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+:root{--bg:#f6f9fc;--surf:#fff;--ink:#0a2540;--ink2:#425466;--mut:#6b7c93;--line:#e3e8ee;--accent:#635bff;--soft:rgba(99,91,255,.08)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0a1a2f;--surf:#10284a;--ink:#f6f9fc;--ink2:#a9b8cc;--mut:#7f93ad;--line:#1f3a5f;--accent:#8c85ff;--soft:rgba(140,133,255,.14)}}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 .w{max-width:1000px;margin:0 auto;padding:16px 16px 48px}
 h1{font:700 26px/1.15 Georgia,serif;margin:8px 0 6px}
 h2{font:700 12px/1.2 system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:28px 0 10px}
@@ -46,6 +46,23 @@ a.chip{text-decoration:none}a.chip:hover{border-color:var(--accent);color:var(--
 .t.on .more{display:block}
 .hint{font-size:13px;font-weight:600;color:var(--accent);margin-top:auto;padding-top:6px;border-top:1px solid var(--line);cursor:pointer}
 .hint::after{content:" ▾"}
+
+h1{font:700 40px/1.12 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-.02em;color:var(--ink)}
+@media (max-width:700px){h1{font-size:30px}}
+.barin b{font:700 15px "Helvetica Neue",Arial,sans-serif;color:var(--ink)}
+.barin nav a:last-child{background:var(--accent);border-color:var(--accent);color:#fff}
+.price{font:700 28px/1.1 "Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--ink);letter-spacing:-.01em}
+.price small{font:500 13px "Helvetica Neue",Arial,sans-serif;color:var(--mut)}
+.t{border-radius:12px;box-shadow:0 1px 3px rgba(50,50,93,.08),0 1px 1px rgba(0,0,0,.04);border-color:transparent}
+.t h3{font:700 16px "Helvetica Neue",Arial,sans-serif;color:var(--ink)}
+.tag{background:var(--soft);border-color:transparent;color:var(--accent);font-weight:600}
+.hint{color:var(--accent)}
+button{background:var(--accent);box-shadow:0 2px 5px rgba(50,50,93,.2)}
+.copy{border-left:0;border-radius:12px;box-shadow:0 1px 3px rgba(50,50,93,.08)}
+.t.feat{background:#0a2540;color:#e6ecf5}
+.t.feat h3,.t.feat .price{color:#fff}.t.feat .d,.t.feat .sub,.t.feat .price small{color:#b6c4d8}
+.t.feat a{color:#a5a0ff}
+.t.feat .tag{background:rgba(255,255,255,.14);color:#fff}
 </style></head><body><div class="bar"><div class="barin"><b>Автоматизация</b><nav><a href="#panels">Панели</a><a href="#c1">1С</a><a href="#bots">Боты и звонки</a><a href="#data">Данные</a><a href="#msgbox">Сообщение</a></nav></div></div>
 <div class="w">
 <h1>Автоматизация рутины в бизнесе и бухгалтерии</h1>
@@ -55,7 +72,7 @@ a.chip{text-decoration:none}a.chip:hover{border-color:var(--accent);color:var(--
 
 <h2 id="panels">Панели руководителя</h2>
 <div class="grid">
-<div class="t"><h3>Сборка панели собственника</h3><div class="price">50 000 ₽ <small>разово</small></div><div class="d">Деньги, продажи, долги и что требует внимания на одном экране телефона. Источники: 1С (рабочая и архивная), СБИС, CRM, банк, ОФД, кассы, таблицы.</div><div class="sub">Примеры на вымышленных данных: <a href="https://avtomatizaciya.github.io/panel-saby-demo/">панель руководителя аутсорса</a>, <a href="https://avtomatizaciya.github.io/panel-prodazh-demo/">панель продаж</a>, <a href="https://avtomatizaciya.github.io/panel-buhfirma-demo/">панель бухфирмы</a>.</div></div>
+<div class="t feat"><h3>Сборка панели собственника <span class="tag">Основа</span></h3><div class="price">50 000 ₽ <small>разово</small></div><div class="d">Деньги, продажи, долги и что требует внимания на одном экране телефона. Источники: 1С (рабочая и архивная), СБИС, CRM, банк, ОФД, кассы, таблицы.</div><div class="sub">Примеры на вымышленных данных: <a href="https://avtomatizaciya.github.io/panel-saby-demo/">панель руководителя аутсорса</a>, <a href="https://avtomatizaciya.github.io/panel-prodazh-demo/">панель продаж</a>, <a href="https://avtomatizaciya.github.io/panel-buhfirma-demo/">панель бухфирмы</a>.</div></div>
 <div class="t"><h3>Ведение панели</h3><div class="price">30 000 ₽ <small>в месяц</small></div><div class="d">Актуальные данные, новые автоматизации под задачи, разбор вопросов по цифрам. БДР, ДДС, баланс, дебиторка, ФОТ, план-факт, прогнозы и кассовые разрывы.</div></div>
 </div>
 
