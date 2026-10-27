@@ -50,7 +50,6 @@ a.chip{text-decoration:none}a.chip:hover{border-color:var(--accent);color:var(--
 h1{font:700 40px/1.12 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-.02em;color:var(--ink)}
 @media (max-width:700px){h1{font-size:30px}}
 .barin b{font:700 15px "Helvetica Neue",Arial,sans-serif;color:var(--ink)}
-.barin nav a:last-child{background:var(--accent);border-color:var(--accent);color:#fff}
 .price{font:700 28px/1.1 "Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--ink);letter-spacing:-.01em}
 .price small{font:500 13px "Helvetica Neue",Arial,sans-serif;color:var(--mut)}
 .t{border-radius:12px;box-shadow:0 1px 3px rgba(50,50,93,.08),0 1px 1px rgba(0,0,0,.04);border-color:transparent}
@@ -63,7 +62,7 @@ button{background:var(--accent);box-shadow:0 2px 5px rgba(50,50,93,.2)}
 .t.feat h3,.t.feat .price{color:#fff}.t.feat .d,.t.feat .sub,.t.feat .price small{color:#b6c4d8}
 .t.feat a{color:#a5a0ff}
 .t.feat .tag{background:rgba(255,255,255,.14);color:#fff}
-</style></head><body><div class="bar"><div class="barin"><b>Автоматизация</b><nav><a href="#panels">Панели</a><a href="#c1">1С</a><a href="#bots">Боты и звонки</a><a href="#data">Данные</a><a href="#msgbox">Сообщение</a></nav></div></div>
+</style></head><body><div class="bar"><div class="barin"><b>Автоматизация</b><nav><a href="#panels">Панели</a><a href="#c1">1С</a><a href="#bots">Боты и звонки</a><a href="#data">Данные</a></nav></div></div>
 <div class="w">
 <h1>Автоматизация рутины в бизнесе и бухгалтерии</h1>
 <p class="lead">Пьяньков Валерий, Ярославль. Разработчик автоматизации с бухгалтерским бэкграундом: 1С, панели руководителя, боты, звонки, связки между программами. Разбор задачи бесплатный, цену называю до начала работы.</p>
@@ -133,22 +132,9 @@ button{background:var(--accent);box-shadow:0 2px 5px rgba(50,50,93,.2)}
 <div class="lv"><span>Несколько источников, регулярное обновление</span><b>30 000 – 60 000 ₽</b></div></div></div>
 </div>
 
-<h2>Готовое сообщение, чтобы переслать</h2>
-<div class="copy" id="msgbox"><pre id="msg">Автоматизирую рутину в бухгалтерии и бизнесе. Что делаю:
-• панель руководителя из 1С, СБИС, CRM, банка, ОФД и таблиц: сборка 50 000 ₽, ведение 30 000 ₽ в месяц;
-• доработки и обработки для 1С: сверка актов, загрузки из Excel, разноска выписок, закрытие периода, контроль договоров;
-• чат-боты от 20 000 ₽, ИИ-звонки от 5 000 ₽, интеграции Битрикс24 и amoCRM с 1С от 15 000 ₽;
-• сверка CRM, ОФД, эквайринга, банка и ЭДО, сторожа и уведомления, парсинг и аналитика данных.
-Точную цену называю после бесплатного разбора и до начала работы.
-Прайс с составом цены и примерами: https://avtomatizaciya.github.io/price/</pre><button id="b" type="button">Скопировать сообщение</button><span class="ok" id="ok"></span></div>
-
 <p class="note">Цены разовые, за задачу. Пометка «ориентир» означает, что итог зависит от числа источников и сложности, точную цену называю после разбора.</p>
 </div>
 <script>
-document.getElementById('b').onclick=function(){var t=document.getElementById('msg').innerText,o=document.getElementById('ok');
-function done(m){o.textContent=m;setTimeout(function(){o.textContent=''},2500)}
-function fb(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');done('Скопировано')}catch(e){done('Не вышло, выделите текст вручную')}a.remove()}
-if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done('Скопировано')},fb)}else fb()};
 var cards=document.querySelectorAll('.t');
 function closeAll(x){cards.forEach(function(c){if(c!==x)c.classList.remove('on')})}
 cards.forEach(function(c){var h=c.querySelector('.hint');if(!h)return;
