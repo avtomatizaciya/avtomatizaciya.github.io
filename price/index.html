@@ -33,26 +33,40 @@ pre{white-space:pre-wrap;word-break:break-word;font:14px/1.5 system-ui,sans-seri
 button{font:600 14px system-ui;background:var(--accent);color:#fff;border:0;border-radius:999px;padding:10px 20px;cursor:pointer}
 .ok{margin-left:10px;color:var(--accent);font-size:13px}
 .note{color:var(--mut);font-size:12.5px;margin-top:22px;max-width:680px}
-</style></head><body><div class="w">
+html{scroll-behavior:smooth}
+.bar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.barin{max-width:1000px;margin:0 auto;padding:8px 16px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.barin b{font:700 15px Georgia,serif}.barin nav{display:flex;gap:6px;flex-wrap:wrap}
+.barin nav a{text-decoration:none;font-size:13px;padding:4px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surf);color:var(--ink2)}
+h2,.copy{scroll-margin-top:64px}
+.price,.lv b{font-variant-numeric:tabular-nums}
+a.chip{text-decoration:none}a.chip:hover{border-color:var(--accent);color:var(--accent)}
+.t{position:relative}
+.more{display:none;position:absolute;left:8px;right:8px;top:calc(100% - 6px);z-index:10;background:var(--surf);border:1px solid var(--accent);border-radius:12px;padding:8px 12px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.t.on .more{display:block}
+.hint{font-size:13px;font-weight:600;color:var(--accent);margin-top:auto;padding-top:6px;border-top:1px solid var(--line);cursor:pointer}
+.hint::after{content:" ▾"}
+</style></head><body><div class="bar"><div class="barin"><b>Автоматизация</b><nav><a href="#panels">Панели</a><a href="#c1">1С</a><a href="#bots">Боты и звонки</a><a href="#data">Данные</a><a href="#msgbox">Сообщение</a></nav></div></div>
+<div class="w">
 <h1>Автоматизация рутины в бизнесе и бухгалтерии</h1>
 <p class="lead">Пьяньков Валерий, Ярославль. Бухгалтер, который сам автоматизирует: 1С, панели руководителя, боты, звонки, связки между программами. Разбор задачи бесплатный, цену называю до начала работы.</p>
-<div class="chips"><span class="chip">1С</span><span class="chip">Битрикс24</span><span class="chip">amoCRM</span><span class="chip">СБИС</span><span class="chip">ОФД</span><span class="chip">эквайринг</span><span class="chip">банк</span><span class="chip">ЭДО</span><span class="chip">Power BI</span><span class="chip">SQL</span><span class="chip">Telegram</span><span class="chip">ВКонтакте</span></div>
-<p class="sub">Наведите курсор или нажмите «Из чего складывается», чтобы увидеть простой вариант и вариант с интеграцией.</p>
+<div class="chips"><a class="chip" href="#c1">1С</a><a class="chip" href="#bots">Битрикс24</a><a class="chip" href="#bots">amoCRM</a><a class="chip" href="#panels">СБИС</a><a class="chip" href="#data">ОФД</a><a class="chip" href="#data">эквайринг</a><a class="chip" href="#data">банк</a><a class="chip" href="#data">ЭДО</a><a class="chip" href="#panels">Power BI</a><a class="chip" href="#data">SQL</a><a class="chip" href="#bots">Telegram</a><a class="chip" href="#bots">ВКонтакте</a></div>
+<p class="sub">Нажмите на систему, чтобы перейти к нужному разделу. «Из чего складывается» в карточке показывает простой вариант и вариант с интеграцией.</p>
 
-<h2>Панели руководителя</h2>
+<h2 id="panels">Панели руководителя</h2>
 <div class="grid">
 <div class="t"><h3>Сборка панели собственника</h3><div class="price">50 000 ₽ <small>разово</small></div><div class="d">Деньги, продажи, долги и что требует внимания на одном экране телефона. Источники: 1С (рабочая и архивная), СБИС, CRM, банк, ОФД, кассы, таблицы.</div><div class="sub">Примеры на вымышленных данных: <a href="https://avtomatizaciya.github.io/panel-saby-demo/">панель руководителя аутсорса</a>, <a href="https://avtomatizaciya.github.io/panel-prodazh-demo/">панель продаж</a>, <a href="https://avtomatizaciya.github.io/panel-buhfirma-demo/">панель бухфирмы</a>.</div></div>
 <div class="t"><h3>Ведение панели</h3><div class="price">30 000 ₽ <small>в месяц</small></div><div class="d">Актуальные данные, новые автоматизации под задачи, разбор вопросов по цифрам. БДР, ДДС, баланс, дебиторка, ФОТ, план-факт, прогнозы и кассовые разрывы.</div></div>
 </div>
 
-<h2>Доработки и обработки для 1С</h2>
+<h2 id="c1">Доработки и обработки для 1С</h2>
 <div class="grid">
 <div class="t"><h3>Доработка 1С под вашу рутину</h3><div class="price">6 000 – 60 000 ₽ <small>за задачу</small></div><div class="d">Загрузка из Excel, закрытие периода, сверка между базами, банк, зарплата и кадры, печатные формы, OData.</div>
-<details><summary>Из чего складывается</summary>
+<div class="hint" tabindex="0">Из чего складывается</div><div class="more">
 <div class="lv"><span>Простая: отчёт, загрузка из Excel, проверка</span><b>6 000 – 15 000 ₽</b></div>
 <div class="lv"><span>Сложная: обмен, сверка, проведение документов</span><b>20 000 – 60 000 ₽</b></div>
 <div class="lv"><span>Ориентир для объёма</span><b>1 900 – 3 000 ₽ в час</b></div>
-<div class="sub">Цену называю после оценки объёма, до начала работы.</div></details></div>
+<div class="sub">Цену называю после оценки объёма, до начала работы.</div></div></div>
 <div class="t"><h3>Сверка актов с контрагентом</h3><div class="price">по запросу</div><div class="d">Акт сверки (PDF, скан) сверяется с учётом в 1С, расхождения видны сразу. Внешняя обработка с инструкцией и проверкой на ваших базах.</div></div>
 <div class="t full"><h3>Готовые обработки на Инфостарте</h3><div class="d">Цена на карточке каждой обработки.</div>
 <ul class="l">
@@ -69,41 +83,41 @@ button{font:600 14px system-ui;background:var(--accent);color:#fff;border:0;bord
 <li><a href="https://infostart.ru/1c/reports/2821205/">Настройка состава OData</a></li></ul></div>
 </div>
 
-<h2>Боты, звонки, интеграции</h2>
+<h2 id="bots">Боты, звонки, интеграции</h2>
 <div class="grid">
 <div class="t"><h3>Чат-боты (Telegram, ВКонтакте)</h3><div class="price">20 000 – 125 000 ₽</div><div class="d">Приём заявок, ответы клиентам, онбординг, напоминания, уведомления руководителю. Работающие примеры: <a href="https://t.me/KontragentWatchBot">проверка компании по ИНН</a>, <a href="https://t.me/Map_geo_bot">аналитик локаций</a>, <a href="https://t.me/LotHunterBot">поиск торгов</a>.</div>
-<details><summary>Из чего складывается</summary>
+<div class="hint" tabindex="0">Из чего складывается</div><div class="more">
 <div class="lv"><span>Простой: меню, ответы, заявки в таблицу</span><b>20 000 – 50 000 ₽</b></div>
-<div class="lv"><span>С интеграцией: 1С, CRM, оплата, кабинет, роли</span><b>60 000 – 125 000 ₽</b></div></details></div>
+<div class="lv"><span>С интеграцией: 1С, CRM, оплата, кабинет, роли</span><b>60 000 – 125 000 ₽</b></div></div></div>
 <div class="t"><h3>ИИ-звонки и ИИ-помощники</h3><div class="price">5 000 – 125 000 ₽</div><div class="d">Голосовой помощник звонит по списку, задаёт вопросы, записывает ответы в таблицу или CRM. Расшифровка записей разговоров и голосовых.</div>
-<details><summary>Из чего складывается</summary>
+<div class="hint" tabindex="0">Из чего складывается</div><div class="more">
 <div class="lv"><span>Простой сценарий обзвона</span><b>5 000 – 15 000 ₽</b></div>
 <div class="lv"><span>Сложный диалог с интеграцией в CRM или 1С</span><b>25 000 – 125 000 ₽</b></div>
-<div class="lv"><span>Минута разговора, по тарифу оператора</span><b>2 – 7 ₽</b></div></details></div>
+<div class="lv"><span>Минута разговора, по тарифу оператора</span><b>2 – 7 ₽</b></div></div></div>
 <div class="t"><h3>Интеграции CRM и сервисов</h3><div class="price">15 000 – 75 000 ₽ <span class="tag">ориентир</span></div><div class="d">Битрикс24 (в том числе коробочный), amoCRM: воронки, автозадачи, связка с 1С, почтой, мессенджерами, ЭДО, сайтом.</div>
-<details><summary>Из чего складывается</summary>
+<div class="hint" tabindex="0">Из чего складывается</div><div class="more">
 <div class="lv"><span>Простая: выгрузка сделок, автозадачи</span><b>15 000 – 25 000 ₽</b></div>
-<div class="lv"><span>Двусторонний обмен с 1С, несколько систем</span><b>30 000 – 75 000 ₽</b></div></details></div>
+<div class="lv"><span>Двусторонний обмен с 1С, несколько систем</span><b>30 000 – 75 000 ₽</b></div></div></div>
 <div class="t"><h3>Сторожа и уведомления</h3><div class="price">10 000 – 70 000 ₽ <span class="tag">ориентир</span></div><div class="d">Сообщение, когда что-то пошло не так: просрочка, долг, упала выручка, не пришёл документ, не сошёлся остаток. Контроль сроков, согласований, табелей, платежей.</div>
-<details><summary>Из чего складывается</summary>
+<div class="hint" tabindex="0">Из чего складывается</div><div class="more">
 <div class="lv"><span>Одно правило и одно уведомление</span><b>10 000 – 30 000 ₽</b></div>
-<div class="lv"><span>Набор правил по нескольким источникам</span><b>30 000 – 70 000 ₽</b></div></details></div>
+<div class="lv"><span>Набор правил по нескольким источникам</span><b>30 000 – 70 000 ₽</b></div></div></div>
 </div>
 
-<h2>Данные и сверка</h2>
+<h2 id="data">Данные и сверка</h2>
 <div class="grid">
 <div class="t"><h3>Сверка между системами</h3><div class="price">40 000 – 150 000 ₽ <span class="tag">ориентир</span></div><div class="d">CRM, ОФД, эквайринг, банк, ЭДО и 1С: выручка по точкам и дням, расхождения, комиссии, возвраты. Данные из личных кабинетов забираются сами.</div>
-<details><summary>Из чего складывается</summary>
+<div class="hint" tabindex="0">Из чего складывается</div><div class="more">
 <div class="lv"><span>Два источника, один отчёт расхождений</span><b>40 000 – 70 000 ₽</b></div>
-<div class="lv"><span>Три и больше источников, автоматический запуск</span><b>70 000 – 150 000 ₽</b></div></details></div>
+<div class="lv"><span>Три и больше источников, автоматический запуск</span><b>70 000 – 150 000 ₽</b></div></div></div>
 <div class="t"><h3>Парсинг, журналы, SQL</h3><div class="price">15 000 – 60 000 ₽ <span class="tag">ориентир</span></div><div class="d">Сбор данных из открытых источников: торги, госзакупки, сайты, цены конкурентов. Разбор журналов 1С и серверных логов, SQL-запросы, расчёты и прогнозы.</div>
-<details><summary>Из чего складывается</summary>
+<div class="hint" tabindex="0">Из чего складывается</div><div class="more">
 <div class="lv"><span>Один источник или один разбор</span><b>15 000 – 30 000 ₽</b></div>
-<div class="lv"><span>Несколько источников, регулярное обновление</span><b>30 000 – 60 000 ₽</b></div></details></div>
+<div class="lv"><span>Несколько источников, регулярное обновление</span><b>30 000 – 60 000 ₽</b></div></div></div>
 </div>
 
 <h2>Готовое сообщение, чтобы переслать</h2>
-<div class="copy"><pre id="msg">Автоматизирую рутину в бухгалтерии и бизнесе. Что делаю:
+<div class="copy" id="msgbox"><pre id="msg">Автоматизирую рутину в бухгалтерии и бизнесе. Что делаю:
 • панель руководителя из 1С, СБИС, CRM, банка, ОФД и таблиц: сборка 50 000 ₽, ведение 30 000 ₽ в месяц;
 • доработки и обработки для 1С: сверка актов, загрузки из Excel, разноска выписок, закрытие периода, контроль договоров;
 • чат-боты от 20 000 ₽, ИИ-звонки от 5 000 ₽, интеграции Битрикс24 и amoCRM с 1С от 15 000 ₽;
@@ -118,5 +132,11 @@ document.getElementById('b').onclick=function(){var t=document.getElementById('m
 function done(m){o.textContent=m;setTimeout(function(){o.textContent=''},2500)}
 function fb(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');done('Скопировано')}catch(e){done('Не вышло, выделите текст вручную')}a.remove()}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done('Скопировано')},fb)}else fb()};
-if(window.matchMedia&&matchMedia('(hover:hover)').matches){document.querySelectorAll('.t').forEach(function(c){var d=c.querySelector('details');if(!d)return;c.addEventListener('mouseenter',function(){d.open=true});c.addEventListener('mouseleave',function(){d.open=false})})}
+var cards=document.querySelectorAll('.t');
+function closeAll(x){cards.forEach(function(c){if(c!==x)c.classList.remove('on')})}
+cards.forEach(function(c){var h=c.querySelector('.hint');if(!h)return;
+h.addEventListener('click',function(e){e.stopPropagation();closeAll(c);c.classList.toggle('on')});
+h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();h.click()}});
+if(window.matchMedia&&matchMedia('(hover:hover)').matches){c.addEventListener('mouseenter',function(){closeAll(c);c.classList.add('on')});c.addEventListener('mouseleave',function(){c.classList.remove('on')})}});
+document.addEventListener('click',function(){closeAll(null)});
 </script></body></html>
