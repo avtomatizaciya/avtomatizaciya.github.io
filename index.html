@@ -1,338 +1,225 @@
-<!doctype html><html lang="ru" data-dashboard-shell="owner-shell-v1"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Дашборды и автоматизация для бизнеса</title><meta name="description" content="Дашборды для руководителя из 1С, Битрикс24, amoCRM, банка и таблиц, готовые обработки 1С и бесплатные калькуляторы. Цифры бизнеса на одном экране."><link rel="stylesheet" href="telegram-contact.css"><style>
-:root{--bg:#f4f4f1;--surf:#fff;--ink:#0b0b0b;--ink2:#52514e;--mut:#898781;--line:#e3e2dc;--good:#2e8b57;--warn:#c98a10;--crit:#c0392b;--info:#4f5b66;--accent:#1f4d3a;--soft:rgba(31,77,58,.08)}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#15171a;--surf:#1f2226;--ink:#f1f1ee;--ink2:#b8b7b2;--mut:#8b8a85;--line:#32363b;--good:#4fb883;--warn:#e0a526;--crit:#e5584a;--info:#9aa5b0;--accent:#5fb089;--soft:rgba(95,176,137,.12)}}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.pick{position:absolute;opacity:0;pointer-events:none}
-.app{min-height:100dvh;display:flex;flex-direction:column;padding:6px 8px 8px;gap:6px;max-width:1280px;margin:0 auto}
-.hd{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
-.hd h1{margin:0;font:700 17px/1.2 Georgia,serif}
-.stamp{font-size:12px;color:var(--ink2);flex:1 1 100%}
-.grp{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
-.lab{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
-.grp label{padding:3px 9px;border:1px solid var(--line);border-radius:999px;background:var(--surf);cursor:pointer;font-size:12px}
-#i0:checked~.app label[for=i0],#i1:checked~.app label[for=i1],#i2:checked~.app label[for=i2],#i3:checked~.app label[for=i3],
-#p0:checked~.app label[for=p0],#p1:checked~.app label[for=p1]{background:var(--accent);border-color:var(--accent);color:#fff}
-.v{display:none;flex:1;flex-direction:column;gap:8px}
-#i0:checked~#p0:checked~.app .v-0-0,#i0:checked~#p1:checked~.app .v-0-1,#i1:checked~#p0:checked~.app .v-1-0,#i1:checked~#p1:checked~.app .v-1-1,
-#i2:checked~#p0:checked~.app .v-2-0,#i2:checked~#p1:checked~.app .v-2-1,#i3:checked~#p0:checked~.app .v-3-0,#i3:checked~#p1:checked~.app .v-3-1{display:flex}
-.verdict{background:var(--surf);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:7px 10px;font:500 clamp(12.5px,3.4vw,15px)/1.3 Georgia,serif}
-.co{display:none}
-.grid{flex:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(112px,1fr);gap:6px}
-@media (min-width:900px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.t{display:flex;flex-direction:column;gap:3px;background:var(--surf);border:1px solid var(--line);border-left:5px solid var(--info);border-radius:14px;padding:8px 10px;cursor:pointer;min-width:0;overflow:hidden}
-.t.good{border-left-color:var(--good)}.t.warn{border-left-color:var(--warn)}.t.crit{border-left-color:var(--crit)}
-.tq{font-weight:600;font-size:13px;color:var(--ink2);display:flex;justify-content:space-between}
-.go{font-size:18px;line-height:1;color:var(--mut)}
-.tb{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 6px}
-.num{font:700 clamp(22px,5vw,34px)/1.05 Georgia,serif}
-.unit{font-size:12px;color:var(--mut)}
-.dl{font-size:12px;font-weight:600}.dl.good{color:var(--good)}.dl.bad{color:var(--crit)}.dl.flat{color:var(--mut)}
-.tv{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:16px}
-.tn{font-size:11.5px;color:var(--ink2);line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.spark{width:100%;height:22px;color:var(--ink2)}
-.stk{display:flex;height:14px;border-radius:7px;overflow:hidden;background:var(--line)}
-.stk i{display:block;height:100%}.stk .c1{background:#8b8a85}.stk .c2{background:#c98a10}.stk .c3{background:var(--good)}
-.mb{display:flex;gap:4px;align-items:flex-end;height:22px}.mb i{flex:1;background:var(--accent);opacity:.75;border-radius:2px}
-.mb.h{align-items:stretch;height:14px;gap:2px}.mb.h i{flex:none;border-radius:2px}
-.pair{height:8px;background:var(--line);border-radius:4px;margin:3px 0;overflow:hidden}.pair i{display:block;height:100%}.pair .a{background:var(--mut)}.pair .b{background:var(--accent)}
-.sq{display:flex;gap:5px}.sq b{width:22px;height:22px;border-radius:6px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
-.sq .crit{background:var(--crit)}.sq .warn{background:var(--warn)}.tv>.ok{color:var(--good);font-weight:600}
-.chips{display:flex;flex-wrap:wrap;gap:4px}.chips b{font-size:11px;font-weight:600;padding:3px 7px;border-radius:999px;background:var(--soft);color:var(--accent)}
-.sec{display:none;background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:12px}
-#o1:checked~.app .sec1,#o2:checked~.app .sec2,#o3:checked~.app .sec3,#o4:checked~.app .sec4,#o5:checked~.app .sec5,#o6:checked~.app .sec6,#o7:checked~.app .sec7,#o8:checked~.app .sec8,#o9:checked~.app .sec9{display:block}
-#o0:not(:checked)~.app .grid,#o0:not(:checked)~.app .verdict,#o0:not(:checked)~.app .co{display:none}
-.sh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-bottom:8px;border-bottom:3px solid var(--info)}
-.sh.good{border-color:var(--good)}.sh.warn{border-color:var(--warn)}.sh.crit{border-color:var(--crit)}
-.back{background:var(--accent);color:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer;font-size:13px}
-.st{font:700 18px Georgia,serif}.sb{margin-left:auto;font:700 20px Georgia,serif}
-.lead{margin:10px 0;font-size:15px;line-height:1.45}
-details.sub{border:1px solid var(--line);border-radius:12px;margin:8px 0;background:var(--bg)}
-details.sub>summary{cursor:pointer;padding:10px 12px;font-weight:600;list-style:none;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
-details.sub>summary::-webkit-details-marker{display:none}
-details.sub>summary::before{content:"▸";color:var(--mut)}details.sub[open]>summary::before{content:"▾"}
-.hint{font-weight:400;font-size:12px;color:var(--mut);margin-left:auto}
-.inner{padding:2px 12px 12px}
-.hint2{color:var(--ink2);font-size:13px}
-.bars{display:flex;flex-direction:column;gap:6px;margin:6px 0}
-.bar{display:grid;grid-template-columns:minmax(90px,38%) 1fr auto;gap:8px;align-items:center;font-size:13px}
-.bt{height:12px;background:var(--line);border-radius:6px;overflow:hidden}.bt i{display:block;height:100%;background:var(--accent);border-radius:6px}
-.bar.bad .bt i{background:var(--crit)}.bar.good .bt i{background:var(--good)}.bv{font-weight:600;white-space:nowrap}
-.tw{overflow-x:auto;margin:6px 0}table{border-collapse:collapse;width:100%;font-size:13px}
-th{text-align:left;color:var(--mut);font-weight:600;border-bottom:1px solid var(--line);padding:6px 8px;white-space:nowrap}
-td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
-.badtxt{color:var(--crit);font-weight:700}
-.badge{display:inline-block;padding:2px 9px;border-radius:999px;color:#fff;font-size:12px;font-weight:700;margin-right:6px}
-.badge.crit{background:var(--crit)}.badge.warn{background:var(--warn)}
-.todo{border-left:4px solid var(--accent);background:var(--soft);padding:8px 10px;border-radius:8px;margin:8px 0}
-.act{margin:10px 0 4px;padding:10px 12px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:var(--soft)}
-.act-h{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;font-size:13px;margin-bottom:6px}
-.act-h b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;opacity:.75}.act-to{font-weight:700}
-.act-t{white-space:pre-wrap;font-size:15px;line-height:1.4}
-.act-b{display:none;gap:8px;margin-top:8px;flex-wrap:wrap}.act-js .act-b{display:flex}
-.act-b button{font:600 13px system-ui,sans-serif;padding:8px 12px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
-.act-b button.act-done{background:transparent;color:var(--ink)}
-.act.is-done{opacity:.55}.act.is-done .act-t{text-decoration:line-through}
-.foot{font-size:12px;color:var(--mut);padding:2px 2px 0}
-.cta{position:absolute;top:8px;right:10px;background:var(--accent);color:#fff;border-radius:24px;padding:7px 12px;font:600 13px system-ui,sans-serif;text-decoration:none}
-.app{position:relative}
-@media print{.cta{display:none}}
-@media (max-width:520px){.foot{display:none}.hd h1{font-size:15px;max-width:60%}.lab{display:none}.stamp{font-size:11px}.cta{padding:5px 10px;font-size:12px}.num{font-size:clamp(20px,6vw,26px)}.dl{font-size:11px}.tq{font-size:12px}}
+<!doctype html><html lang="ru" class="no-js"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Автоматизация и дашборды для бизнеса</title>
+<meta name="description" content="Панель руководителя на одном экране, автоматизация 1С, CRM, банка и отчётов. Цифры бизнеса без ручной рутины.">
+<meta property="og:title" content="Автоматизация и дашборды для бизнеса"><meta property="og:description" content="Цифры вашего бизнеса на одном экране, рутина - без вас.">
+<style>
+:root{--bg:#fff;--soft:#f6f9fc;--ink:#0a2540;--ink2:#425466;--mut:#6b7c93;--line:#e3e8ee;--a:#635bff;--a2:#00b4d8;--ok:#0e9f6e;--bad:#e5484d;--r:16px;color-scheme:light}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Inter","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}img,svg{max-width:100%}
+.ic{width:22px;height:22px;flex:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,3vw,32px)}
+/* шапка */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);border-bottom:1px solid transparent;transition:border-color .2s}
+.nav.sc{border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.logo{font-weight:700;letter-spacing:-.01em;text-decoration:none;display:flex;align-items:center;gap:9px}
+.logo i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--a),var(--a2));display:block}
+.nav nav{display:flex;gap:4px;margin:0 auto}
+.nav nav a{text-decoration:none;font-size:14.5px;color:var(--ink2);padding:8px 12px;border-radius:999px;transition:background .15s,color .15s}
+.nav nav a:hover{background:var(--soft);color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 15px/1 inherit;text-decoration:none;border-radius:999px;padding:14px 24px;border:1px solid var(--line);background:#fff;color:var(--ink);transition:transform .15s,box-shadow .15s,border-color .15s;cursor:pointer}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(10,37,64,.12);border-color:#cdd5df}
+.btn.p{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.p:hover{background:#13355b;box-shadow:0 10px 28px rgba(10,37,64,.28)}
+.btn.sm{padding:10px 18px;font-size:14px}
+@media (max-width:860px){.nav nav{display:none}.nav .btn{margin-left:auto}}
+.nav .btn,.logo{white-space:nowrap}
+@media (max-width:520px){.nav .wrap{gap:10px}.logo{font-size:15px}.nav .btn.sm{padding:10px 14px}.wbar span{display:none}.proof{display:grid;grid-template-columns:1fr 1fr;gap:18px}.btn{width:100%;justify-content:center}.cta{width:100%}}
+/* hero */
+.hero{position:relative;overflow:hidden;padding:clamp(40px,7vw,96px) 0 0}
+.hero:before{content:"";position:absolute;inset:-20% -10% auto -10%;height:120%;background:radial-gradient(40% 40% at 20% 20%,rgba(99,91,255,.18),transparent 70%),radial-gradient(35% 40% at 80% 10%,rgba(0,180,216,.18),transparent 70%),radial-gradient(30% 35% at 60% 60%,rgba(255,130,200,.12),transparent 70%);z-index:-1;animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(2%,3%,0) scale(1.06)}}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--a);background:rgba(99,91,255,.09);border-radius:999px;padding:6px 14px}
+.pill b{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(14,159,110,.18)}
+h1{font-size:clamp(36px,6vw,72px);line-height:1.04;letter-spacing:-.035em;margin:20px 0 18px;max-width:900px;font-weight:750}
+h1 em{font-style:normal;background:linear-gradient(100deg,var(--a),var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(17px,1.6vw,21px);color:var(--ink2);max-width:640px;margin:0 0 30px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.proof{display:flex;gap:clamp(18px,4vw,48px);flex-wrap:wrap;margin:36px 0 0}
+.proof div{min-width:110px}.proof b{display:block;font-size:30px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}.proof span{font-size:13.5px;color:var(--mut)}
+/* демо-окно */
+.stage{margin-top:clamp(36px,5vw,64px);perspective:1800px}
+.win{background:#fff;border:1px solid var(--line);border-radius:18px 18px 0 0;box-shadow:0 40px 80px -20px rgba(10,37,64,.28),0 0 0 1px rgba(10,37,64,.04);overflow:hidden;transform:rotateX(2.5deg);transform-origin:top center;transition:transform .5s}
+.win:hover{transform:rotateX(0)}
+.wbar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--soft)}
+.wbar i{width:11px;height:11px;border-radius:50%;background:#dfe5ec}
+.wbar span{margin-left:12px;font-size:12.5px;color:var(--mut);background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 14px}
+.wbar em{margin-left:auto;font-style:normal;font-size:12px;color:var(--mut)}
+.dash{padding:clamp(14px,2vw,24px)}
+.dtop{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.dtop h3{margin:0 auto 0 0;font-size:18px;letter-spacing:-.01em}
+.seg{display:inline-flex;background:var(--soft);border-radius:999px;padding:3px}
+.seg button{font:600 13px/1 inherit;border:0;background:transparent;color:var(--ink2);padding:8px 14px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(10,37,64,.14)}
+.kp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.k{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:#fff}
+.k small{display:block;color:var(--mut);font-size:12.5px}.k b{display:block;font-size:clamp(22px,2.4vw,30px);letter-spacing:-.02em;margin:2px 0;font-variant-numeric:tabular-nums}
+.k em{font-style:normal;font-size:12.5px;font-weight:600}.up{color:var(--ok)}.dn{color:var(--bad)}
+.dg{display:grid;grid-template-columns:1.6fr 1fr;gap:12px;margin-top:12px}
+.box{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:#fff;min-width:0}
+.box h4{margin:0 0 10px;font-size:13px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.bars{display:flex;align-items:flex-end;gap:8px;height:150px}
+.bars div{flex:1;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,var(--a),#a29bff);transition:height .7s cubic-bezier(.2,.8,.2,1);min-height:4px;position:relative}
+.bars div.cur{background:linear-gradient(180deg,var(--a2),#7fdcef)}
+.bl{display:flex;gap:8px;margin-top:6px}.bl span{flex:1;text-align:center;font-size:11.5px;color:var(--mut)}
+.al{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.al li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.35;padding:8px 10px;border-radius:10px;background:var(--soft)}
+.al li i{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:none}
+.al .r i{background:var(--bad)}.al .y i{background:#f5a524}.al .g i{background:var(--ok)}
+.fade{animation:fd .5s}@keyframes fd{from{opacity:.3;transform:translateY(4px)}}
+@media (max-width:820px){.kp{grid-template-columns:repeat(2,1fr)}.dg{grid-template-columns:1fr}.win{transform:none}}
+/* секции */
+section{padding:clamp(56px,8vw,112px) 0}
+section.alt{background:var(--soft)}
+.ey{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--a)}
+h2{font-size:clamp(28px,4vw,46px);line-height:1.1;letter-spacing:-.03em;margin:12px 0 14px;max-width:760px;font-weight:720}
+.sub{color:var(--ink2);font-size:18px;max-width:640px;margin:0}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:44px}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:44px}
+@media (max-width:900px){.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}}
+.c{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;transition:transform .2s,box-shadow .2s,border-color .2s;text-decoration:none;display:flex;flex-direction:column;gap:10px;position:relative}
+a.c:hover,.c.hv:hover{transform:translateY(-4px);box-shadow:0 20px 40px -12px rgba(10,37,64,.18);border-color:#cdd5df}
+.c .bi{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;color:var(--a);background:rgba(99,91,255,.10)}
+.c h3{margin:6px 0 0;font-size:20px;letter-spacing:-.015em}.c p{margin:0;color:var(--ink2);font-size:15.5px}
+.c .go{margin-top:auto;padding-top:8px;font-weight:600;font-size:14.5px;color:var(--a);display:flex;align-items:center;gap:6px}
+.c .go .ic{width:16px;height:16px;transition:transform .2s}a.c:hover .go .ic{transform:translateX(4px)}
+.c .meta{font-size:12.5px;color:var(--mut);font-weight:600;letter-spacing:.02em}
+/* шаги */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px;counter-reset:s}
+.st{padding:0 28px 0 0;position:relative}
+.st:before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--ink);color:#fff;font-weight:700;margin-bottom:16px}
+.st:after{content:"";position:absolute;top:20px;left:52px;right:12px;height:1px;background:var(--line)}
+.st:last-child:after{display:none}
+.st h3{margin:0 0 6px;font-size:19px}.st p{margin:0;color:var(--ink2);font-size:15.5px}
+@media (max-width:900px){.steps{grid-template-columns:1fr;gap:28px}.st:after{display:none}}
+/* калькулятор */
+.calc{display:grid;grid-template-columns:1.1fr 1fr;gap:0;margin-top:44px;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 30px 60px -30px rgba(10,37,64,.25)}
+.cin{padding:clamp(22px,3vw,40px);display:grid;gap:22px;align-content:start}
+.cin label{display:flex;justify-content:space-between;font-size:15px;font-weight:600;margin-bottom:8px}.cin label b{color:var(--a);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--a);height:6px}
+.cout{padding:clamp(22px,3vw,40px);background:linear-gradient(160deg,#0a2540,#17386a);color:#fff;display:flex;flex-direction:column;gap:6px}
+.cout small{color:#b4c3d9;font-size:14px}.cout .big{font-size:clamp(40px,5vw,60px);font-weight:750;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.cout .row{display:flex;justify-content:space-between;gap:16px;border-top:1px solid rgba(255,255,255,.14);padding:12px 0 0;margin-top:12px;font-size:15px}.cout .row b{font-variant-numeric:tabular-nums}
+.cout .btn{margin-top:auto;background:#fff;color:var(--ink);border-color:#fff;justify-content:center}
+.note{font-size:12.5px;color:var(--mut);margin-top:14px}
+@media (max-width:900px){.calc{grid-template-columns:1fr}}
+/* финал */
+.fin{background:linear-gradient(135deg,#0a2540,#241b6b 60%,#3b2fb0);color:#fff;border-radius:28px;padding:clamp(32px,6vw,80px);text-align:center;position:relative;overflow:hidden}
+.fin:before{content:"";position:absolute;width:520px;height:520px;right:-120px;top:-200px;border-radius:50%;background:radial-gradient(circle,rgba(0,180,216,.45),transparent 65%)}
+.fin h2{margin:0 auto 14px;color:#fff;position:relative}.fin p{color:#c3cfe6;margin:0 auto 28px;max-width:560px;font-size:18px;position:relative}
+.fin .cta{justify-content:center;position:relative}.fin .btn.p{background:#fff;color:var(--ink);border-color:#fff}
+.fin .btn:not(.p){background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
+footer{padding:34px 0 48px;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}footer a{text-decoration:none}footer a:hover{color:var(--ink)}
+/* появление */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.rv.in{opacity:1;transform:none}
+.no-js .rv{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.hero:before{animation:none}*{scroll-behavior:auto!important}.bars div,.fade{transition:none;animation:none}}
+html{scroll-padding-top:76px}
+</style></head><body>
+<header class="nav" id="nav"><div class="wrap"><a class="logo" href="#top"><i></i>Автоматизация и дашборды</a>
+<nav><a href="#demo">Демо</a><a href="#chto">Что получите</a><a href="#schet">Калькулятор</a><a href="#primery">Примеры</a><a href="price/">Стоимость</a></nav>
+<a class="btn p sm" href="https://t.me/pyankov_vv?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%82%D0%B0%D0%BA%D1%83%D1%8E%20%D0%BF%D0%B0%D0%BD%D0%B5%D0%BB%D1%8C%20%D0%B4%D0%BB%D1%8F%20%D1%81%D0%B2%D0%BE%D0%B5%D0%B3%D0%BE%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D0%B0.%20%D0%A0%D0%B0%D1%81%D1%81%D0%BA%D0%B0%D0%B6%D1%83%2C%20%D1%87%D0%B5%D0%BC%20%D0%B7%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D1%8E%D1%81%D1%8C%3A%20" rel="noopener">Написать</a></div></header>
 
-.rd{display:block;width:100%;aspect-ratio:2.2;border-radius:4px;min-height:9px}
-.rd.ok{background:#9bcfb3}.rd.warn{background:var(--warn)}.rd.crit{background:var(--crit)}.rd.na{background:repeating-linear-gradient(45deg,#b8b7b2,#b8b7b2 3px,#e0dfd9 3px,#e0dfd9 6px)}
-.rmx{display:grid;grid-template-columns:minmax(70px,1.6fr) repeat(5,1fr);gap:4px;align-items:center;align-content:center;font-size:11px}
-.rmx em{font-style:normal;color:var(--mut);text-align:center;font-size:10px}.rn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink2)}
-.rs{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;color:#fff;white-space:nowrap}
-.rs.ok{background:#3f9d6d}.rs.warn{background:var(--warn)}.rs.crit{background:var(--crit)}.rs.na{background:#8b8a85}
-.rf{border-left:4px solid var(--line);padding:4px 10px;margin:6px 0}.rf.warn{border-color:var(--warn)}.rf.crit{border-color:var(--crit)}.rf.na{border-color:#8b8a85}
-.rf p{margin:3px 0 0;font-size:13px}
-@media (min-width:521px){.hd{padding-right:96px}}.srcbtn{margin-left:auto;font-size:12px;padding:3px 9px;border:1px dashed var(--mut);border-radius:999px;cursor:pointer;color:var(--ink2);background:var(--surf)}
-@media (max-width:520px){.rmx{font-size:10px}.rn{font-size:10px}.srcbtn{margin-left:0}}
+<main id="top">
+<div class="hero"><div class="wrap">
+<span class="pill"><b></b>Беру новые проекты</span>
+<h1>Цифры вашего бизнеса <em>на одном экране.</em> Рутина - без вас.</h1>
+<p class="lead">Собираю панели руководителя и автоматизирую 1С, CRM, банк и отчёты. Вы видите деньги, долги и план-факт за минуту, а сверки и напоминания делает система.</p>
+<div class="cta"><a class="btn p" href="https://t.me/pyankov_vv?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%82%D0%B0%D0%BA%D1%83%D1%8E%20%D0%BF%D0%B0%D0%BD%D0%B5%D0%BB%D1%8C%20%D0%B4%D0%BB%D1%8F%20%D1%81%D0%B2%D0%BE%D0%B5%D0%B3%D0%BE%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D0%B0.%20%D0%A0%D0%B0%D1%81%D1%81%D0%BA%D0%B0%D0%B6%D1%83%2C%20%D1%87%D0%B5%D0%BC%20%D0%B7%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D1%8E%D1%81%D1%8C%3A%20" rel="noopener">Описать задачу в Telegram <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn" href="#schet">Посчитать, сколько стоит рутина</a></div>
+<div class="proof"><div><b data-n="11">0</b><span>обработок 1С на Инфостарте</span></div><div><b data-n="3765">0</b><span>просмотров карточек</span></div><div><b data-n="8">0</b><span>бесплатных калькуляторов</span></div><div><b data-n="3">0</b><span>демо-панели можно открыть</span></div></div>
+<div class="stage" id="demo"><div class="win">
+<div class="wbar"><i></i><i></i><i></i><span>Панель руководителя</span><em>демо · вымышленные данные</em></div>
+<div class="dash"><div class="dtop"><h3>Сводка по компании</h3>
+<div class="seg" id="sp"><button class="on" data-p="0">Неделя</button><button data-p="1">Месяц</button><button data-p="2">Квартал</button></div>
+<div class="seg" id="sb"><button class="on" data-b="0">Все точки</button><button data-b="1">Розница</button><button data-b="2">Опт</button></div></div>
+<div class="kp"><div class="k"><small>Выручка</small><b id="k1">-</b><em id="d1"></em></div><div class="k"><small>Прибыль</small><b id="k2">-</b><em id="d2"></em></div>
+<div class="k"><small>Нам должны</small><b id="k3">-</b><em id="d3"></em></div><div class="k"><small>Выполнение плана</small><b id="k4">-</b><em id="d4"></em></div></div>
+<div class="dg"><div class="box"><h4>Выручка по периодам</h4><div class="bars" id="bars"></div><div class="bl" id="bl"></div></div>
+<div class="box"><h4>Что требует внимания</h4><ul class="al" id="al"></ul></div></div></div></div></div>
+</div></div>
 
-.tv{align-items:stretch;min-height:56px}.tv>*{flex:1 1 auto}
-.area{width:100%;height:100%;min-height:56px;color:var(--accent)}
-.tmbox{display:flex;width:100%;height:100%;min-height:80px;gap:2px}.tmw{display:flex;gap:2px;width:100%;height:100%}.tmr{display:flex;min-width:0;min-height:0}
-.tm{display:flex;flex-direction:column;justify-content:flex-end;padding:4px 6px;border-radius:5px;min-width:0;min-height:0;overflow:hidden;color:#fff;font-size:11px;line-height:1.15}
-.tm b{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tm span{opacity:.9}
-.tm.up{background:#4fa578}.tm.mid{background:#8b8a85}.tm.dn{background:#c0392b}.tm.one{flex:1;width:100%}
-.wf{display:flex;gap:8px;height:100%;min-height:80px;align-items:stretch}
-.wfc{flex:1;display:flex;flex-direction:column;align-items:center;font-size:11px;min-width:0}
-.wfb{position:relative;flex:1;width:100%;background:var(--soft);border-radius:4px}.wfb i{position:absolute;left:0;right:0;border-radius:3px}
-.wfc b{margin-top:3px;font-size:12px}.wfc span{color:var(--mut)}
-.c0{background:#8b8a85}.c1{background:#c98a10}.c2{background:#b8662a}.c3{background:var(--good)}.c4{background:var(--crit)}
-.heat{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;align-content:center}
-.heat em{font-style:normal;font-size:10px;color:var(--mut);text-align:center}
-.heat i{aspect-ratio:1.5;border-radius:3px;display:block;min-height:10px}
-.h3{background:#1f6b49}.h2{background:#4fa578}.h1{background:#9bcfb3}.h0{background:#d9e9df}.hx{background:var(--crit)}
-.bars.compact{gap:5px;justify-content:center}.bars.compact .bar{grid-template-columns:minmax(70px,42%) 1fr auto;font-size:12px}
-.al{display:flex;flex-direction:column;gap:5px;justify-content:center;font-size:12.5px;line-height:1.25}
-.al .badge{min-width:20px;text-align:center;padding:1px 6px;margin-right:6px}
-.chips{align-content:center}.chips b{font-size:12px;padding:4px 9px}
-.tn{font-size:12.5px}
-@media (min-width:900px){.tq{font-size:15px}.tn{font-size:13.5px}.num{font-size:clamp(30px,3vw,42px)}.tm{font-size:12.5px}.wfc{font-size:12.5px}.bars.compact .bar{font-size:13px}.al{font-size:14px}.t{padding:12px 14px}}
-@media (max-width:520px){.tn{font-size:11.5px}.tm{font-size:10px}.tm b{font-size:10px}.tv{max-height:66px;min-height:44px;overflow:hidden}.al div:nth-child(n+3){display:none}.chips b:nth-child(n+5){display:none}.tm span{display:none}.tm{padding:3px 5px}.bars.compact .bar:nth-child(n+4){display:none}.t{gap:2px;padding:7px 9px}.num{font-size:22px}.tq{font-size:12px}.tn{-webkit-line-clamp:2}.verdict{font-size:12.5px;padding:5px 8px}.tmbox,.wf{min-height:0}.wfc span{display:none}.wfc b{font-size:10px;margin-top:2px}.heat i:nth-of-type(n+11){display:none}.heat em{display:none}.bars.compact .bar{grid-template-columns:42% 1fr auto;font-size:11px;gap:5px}.bl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bars.compact{gap:3px}.al{font-size:11px;gap:3px}.al div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.chips b{font-size:10.5px;padding:2px 6px}.area{min-height:40px}}
+<section id="chto"><div class="wrap"><span class="ey">Что вы получите</span><h2>Не отчёт ради отчёта, а контроль над бизнесом</h2>
+<p class="sub">Результат виден в первый же день: понятные цифры и меньше ручной работы у команды.</p><div class="g3"><div class="c hv rv"><span class="bi"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h3>Все цифры на одном экране</h3><p>Деньги, выручка, долги, план и факт - собираются из 1С, банка, CRM и таблиц и обновляются сами. Утром открыли и всё видно.</p></div><div class="c hv rv"><span class="bi"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21a2 2 0 0 0 4 0"/></svg></span><h3>Тревоги вместо поиска проблем</h3><p>Панель сама показывает, кто не заплатил, где просрочка и что горит. Вы реагируете, а не ищете.</p></div><div class="c hv rv"><span class="bi"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><h3>Рутина уходит из рук</h3><p>Сверки, выписки, отчёты и напоминания делают скрипты и боты. Люди занимаются клиентами, а не копированием.</p></div><div class="c hv rv"><span class="bi"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></span><h3>Всё связано между собой</h3><p>1С, Битрикс24, amoCRM, банк, Telegram и Google Таблицы работают как одна система, без ручных переносов.</p></div><div class="c hv rv"><span class="bi"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span><h3>Понятно без обучения</h3><p>Один экран, крупные цифры, подсказки. Собственник разбирается за минуту, без инструкции.</p></div><div class="c hv rv"><span class="bi"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-6A8 8 0 1 1 21 12z"/></svg></span><h3>Рядом, на связи</h3><p>Пишете в Telegram, обсуждаем задачу простыми словами, получаете рабочий результат, а не техническое задание.</p></div></div></div></section>
 
-.app{position:relative}
-.hd{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;padding-right:0}
-.hd h1{margin:0 6px 0 0;font:700 17px/1.2 Georgia,serif}
-.gap{flex:1}
-.stamp{flex:1 1 100%;font-size:12px;color:var(--ink2)}
-.dd{position:relative}
-.ddb{font:600 13px system-ui,sans-serif;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surf);color:var(--ink);cursor:pointer;max-width:100%;text-align:left}
-.ddb .lab{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
-.ddb .car{color:var(--mut)}
-.dd.open .ddb{border-color:var(--accent);background:var(--soft)}
-.ddm{display:none;position:absolute;left:0;top:calc(100% + 4px);z-index:40;min-width:240px;max-width:min(92vw,360px);max-height:60vh;overflow:auto;background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:6px;box-shadow:0 10px 28px rgba(0,0,0,.18)}
-.dd.open .ddm{display:block}
-.opt{display:flex;gap:8px;align-items:center;padding:7px 8px;border-radius:8px;cursor:pointer;font-size:14px}
-.opt:hover{background:var(--soft)}.opt.all{font-weight:700;border-bottom:1px solid var(--line);border-radius:8px 8px 0 0;margin-bottom:4px}
-.opt input{width:16px;height:16px;accent-color:var(--accent)}
-.cust{display:none;padding:6px 8px;gap:6px;align-items:center;font-size:13px}.cust.on{display:flex;flex-wrap:wrap}
-.cust input{font:inherit;padding:4px 6px;border:1px solid var(--line);border-radius:8px;background:var(--surf);color:var(--ink)}
-.srcbtn{font:500 12px system-ui,sans-serif;padding:5px 10px;border:1px dashed var(--mut);border-radius:999px;cursor:pointer;color:var(--ink2);background:var(--surf);margin:0}
-.reset{font:500 12px system-ui,sans-serif;padding:5px 10px;border:1px solid var(--crit);border-radius:999px;cursor:pointer;color:var(--crit);background:transparent}
-.body{display:flex;flex-direction:column;gap:8px;flex:1}
-.t{cursor:pointer}.t:focus-visible{outline:2px solid var(--accent)}
-.sec{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:12px;display:block}
-.chart{height:150px;margin:4px 0}.chart.sm{height:auto;min-height:150px}.chart .area{height:100%}
-.n{text-align:right}th.n{text-align:right}
-th[data-s]{cursor:pointer;user-select:none}th.on{color:var(--ink)}
-tr.tot td{font-weight:700;border-top:2px solid var(--line)}
-.dtb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0}
-.dtb .tf{flex:1 1 160px;font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surf);color:var(--ink)}
-.dtb .cnt{font-size:12px;color:var(--mut)}.tcopy{font:600 12px system-ui,sans-serif;padding:6px 10px;border-radius:999px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
-.wk{display:flex;gap:4px;align-items:flex-end;height:120px}.wkc{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;font-size:10px;text-align:center;color:var(--mut)}.wkc i{display:block;background:var(--accent);opacity:.8;border-radius:3px}
-.gw{display:flex;gap:6px;align-items:flex-end;height:140px}.gwc{flex:1;display:flex;flex-direction:column;height:100%;font-size:10px;color:var(--mut);text-align:center}
-.gwb{flex:1;display:flex;gap:2px;align-items:flex-end}.gwb i{flex:1;border-radius:3px 3px 0 0;display:block}.gi{background:#2e8b57}.go2{background:#c98a10}
-.stk{display:flex;height:16px;border-radius:8px;overflow:hidden;background:var(--line);margin:6px 0}.stk i{display:block;height:100%}
-.lg{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--ink2)}.lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}
-.empty{color:var(--mut);font-size:13px}
-.h-none{visibility:hidden}.sec .heat{max-width:520px}.sec .heat i{aspect-ratio:2.4}
-.heat i{min-height:12px}
-.c5{background:#c0392b}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:10px 0}
-.kpi{background:var(--bg);border:1px solid var(--line);border-left:4px solid var(--info);border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;gap:2px}
-.kpi.good{border-left-color:var(--good)}.kpi.warn{border-left-color:var(--warn)}.kpi.crit{border-left-color:var(--crit)}
-.kpi .kl{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}.kpi b{font:700 22px/1.1 Georgia,serif}.kpi .kd{font-size:12px;color:var(--ink2)}
-.insights{margin:10px 0;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
-.ih{font:700 12px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin-bottom:6px}
-.ins{display:flex;gap:10px;padding:7px 0;border-top:1px solid var(--line)}.ins:first-of-type{border-top:0}
-.ins .ic{flex:none;width:22px;height:22px;border-radius:50%;background:var(--info);color:#fff;display:flex;align-items:center;justify-content:center;font:700 13px system-ui,sans-serif;margin-top:1px}
-.ins.crit .ic{background:var(--crit)}.ins.warn .ic{background:var(--warn)}.ins.good .ic{background:var(--good)}
-.ins b{font-size:14px}.ins p{margin:2px 0 0;font-size:13px;color:var(--ink2)}
-.pn{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}
-.pnh{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin-bottom:8px}.pnh b{font:700 16px Georgia,serif}.pnh span{font-size:12px;color:var(--mut)}
-.read{margin:8px 0 0;font-size:13px;color:var(--ink2);background:var(--bg);border-radius:10px;padding:7px 10px}.read b{color:var(--accent)}
-.wfl{display:flex;gap:4px;align-items:stretch;overflow-x:auto;padding-bottom:4px}
-.wfx{flex:1 0 62px;display:flex;flex-direction:column;align-items:center;min-width:62px}
-.wfv{font:700 12px system-ui,sans-serif;margin-bottom:3px;white-space:nowrap}
-.wfp{position:relative;height:180px;width:100%;background:repeating-linear-gradient(0deg,transparent,transparent 44px,var(--line) 44px,var(--line) 45px)}
-.wfp i{position:absolute;left:12%;right:12%;border-radius:4px;display:block}
-.wfp .tot{background:#6b7f8c}.wfp .neg{background:var(--crit)}.wfp .up{background:#2e8b57}.wfp .dn{background:#d9882b}
-.wfl2{font-size:11px;color:var(--ink2);text-align:center;margin-top:4px;line-height:1.2}
-.lcw{position:relative;padding-left:44px}
-.lcb{position:relative;height:170px}.lc{width:100%;height:100%;display:block}
-.lc .gl{stroke:var(--line);stroke-width:1}.lc .rl{stroke:var(--warn);stroke-width:1.2;stroke-dasharray:4 3}.lc .zl{stroke:var(--mut);stroke-width:1.2}
-.ld{position:absolute;width:9px;height:9px;border-radius:50%;margin:-4px 0 0 -4px;border:2px solid var(--surf)}
-.yl{position:absolute;left:0;font-size:11px;color:var(--mut);width:42px;text-align:right}.yl.t{top:0}.yl.b{top:150px}
-.xl{display:flex;justify-content:space-between;font-size:11px;color:var(--mut);margin-top:4px}
-.lgd{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;margin-top:6px}.lgd i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}
-.cols{display:flex;gap:6px;align-items:flex-end;height:190px}
-.colx{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;min-width:0}
-.cb{width:100%;flex:1;display:flex;align-items:flex-end;justify-content:center;gap:3px}.cb i{display:block;width:70%;background:var(--accent);opacity:.85;border-radius:4px 4px 0 0}
-.cb i.warnc{background:var(--warn)}.cb i.goodc{background:var(--good)}.cb.two i{width:42%}
-.c-a{background:#2e8b57!important}.c-b{background:#d9882b!important}
-.cv{font:700 11px system-ui,sans-serif;margin-bottom:3px}.cl{font-size:11px;color:var(--mut);margin-top:4px;white-space:nowrap}
-.lgi{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}.lgi.a{background:#2e8b57}.lgi.b{background:#d9882b}
-.mt td,.mt th{padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}.mt td.neg{color:var(--crit)}
-.mt .tot td{font-weight:700;background:var(--bg)}
-.bal{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:8px}.balc h5{margin:0 0 4px;font:700 14px system-ui,sans-serif}
-@media (max-width:520px){.wfx{flex:1 0 56px;min-width:56px}.wfp{height:150px}.kpi b{font-size:19px}}
-.back{cursor:pointer}
-details.sub>summary .badge{margin-right:6px}
-@media (max-width:520px){.ddb{padding:4px 8px;font-size:12px}.ddb .lab{display:inline!important;font-size:10px}.hd{gap:4px 5px}.hd h1{flex:1 1 100%;font-size:15px}.srcbtn{margin-left:0}.ddm{position:fixed;left:8px;right:8px;top:auto;max-width:none}.chart{height:120px}}
+<section class="alt"><div class="wrap"><span class="ey">Как это работает</span><h2>От вашей задачи до рабочей панели</h2>
+<div class="steps"><div class="st rv"><h3>Вы описываете задачу</h3><p>Пишете в Telegram своими словами: какие цифры нужны и откуда они сейчас берутся. Спрашиваю только самое важное.</p></div>
+<div class="st rv"><h3>Собираю и показываю</h3><p>Подключаю источники, собираю панель на ваших данных и показываю результат, а не обещания. Правки вносим сразу.</p></div>
+<div class="st rv"><h3>Работает само</h3><p>Панель обновляется каждый день, тревоги приходят вам в мессенджер, а рутина выполняется без участия людей.</p></div></div></div></section>
 
-/* адаптер витрины к замороженной оболочке owner-shell-v1: сетка 4+3, вкладки, разделы, карточки фрагментов */
-.grid{grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:minmax(150px,1fr);gap:8px}.grid>.t:nth-child(-n+4){grid-column:span 3}.grid>.t:nth-child(n+5){grid-column:span 4}@media(max-width:1000px){.grid>.t:nth-child(n){grid-column:span 6}.grid>.t:last-child{grid-column:span 12}}@media(max-width:600px){.grid>.t:nth-child(n){grid-column:span 12}}.grid>.t{text-decoration:none;color:inherit}
-.app{max-width:1280px}.hd{justify-content:space-between}.hd h1 small{font:400 12px system-ui,sans-serif;color:var(--mut)}
-.tabs{display:flex;gap:2px;flex-wrap:wrap}.tabs a{padding:5px 10px;border-radius:999px;color:var(--ink2);font-size:13px;text-decoration:none}.tabs a.on{background:var(--accent);color:#fff}.tabs a:hover{background:var(--soft)}
-.hd .cta{margin:0}.hd .cta a{background:var(--accent);color:#fff;border-radius:999px;padding:6px 14px;font-weight:600;text-decoration:none;font-size:13px}
-.kpis{grid-template-columns:repeat(7,minmax(0,1fr));margin:0;gap:6px}.kpi{padding:5px 9px}.kpi b{font-size:17px}@media(max-width:1000px){.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:600px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.kpi .kl,.kpi .kd{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#screen .tv{max-height:118px;overflow:hidden;justify-content:flex-start}#screen .tv>.bars,#screen .tv>.sq,#screen .tv>.chips,#screen .tv>.stk,#screen .tv>.spark{flex:none}#screen .tv>.spark{height:46px;margin-top:4px}.hint2{display:block;margin-top:4px}.bars{display:flex;flex-direction:column;gap:3px;margin:2px 0}.bar{display:grid;grid-template-columns:minmax(90px,46%) 1fr auto;gap:6px;align-items:center;font-size:11px}.bar>span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bt{height:9px;background:var(--line);border-radius:5px;overflow:hidden;display:block}.bt i{display:block;height:100%;background:var(--accent)}.bv{font-weight:600}
-.lg{display:flex;flex-wrap:wrap;gap:3px 10px;font-size:11px;color:var(--ink2);margin-top:4px}.lg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:middle}
-.sq b.info{background:var(--info)}.sq b.good{background:var(--good)}
-.sec{display:block;margin-top:8px}.js .sec{display:none}.js .sec.on{display:block}.js .home.off{display:none}.sh .back{text-decoration:none}
-.calcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:10px}.calc{display:flex;flex-direction:column;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-decoration:none;color:inherit}.calc:hover{border-color:var(--accent)}.calc small{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.04em}.calc b{font-size:15px}.calc span{font-size:13px;color:var(--ink2)}.calc em{font-style:normal;color:var(--accent);font-weight:600;font-size:13px;margin-top:auto}
-.list{display:grid;gap:8px;margin-top:10px}.row{background:var(--bg);border:1px solid var(--line);border-radius:12px}.row>summary{display:flex;gap:12px;align-items:center;padding:10px 14px;cursor:pointer;list-style:none}.row>summary::-webkit-details-marker{display:none}.row .n{font:700 14px Georgia,serif;color:var(--accent);min-width:28px}.row h3{margin:0;font-size:15px}.row .rt{font-size:12px;color:var(--mut)}.row .pl{margin-left:auto;color:var(--mut);font-size:20px}.row[open] .pl{transform:rotate(45deg)}.row .body{padding:0 14px 12px 54px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}.row ul{margin:0;padding-left:18px;font-size:13px;color:var(--ink2)}.row .side{margin-left:auto}.btn.s{display:inline-block;background:var(--accent);color:#fff;border-radius:999px;padding:6px 12px;text-decoration:none;font-weight:600;font-size:13px}
-.kon{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}@media(max-width:900px){.kon{grid-template-columns:1fr}}.kon fieldset{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 10px}.kon legend{font-weight:600;padding:0 6px;font-size:13px}.kon .chips{display:flex;flex-wrap:wrap;gap:6px}.kon .chips label{cursor:pointer}.kon .chips input{position:absolute;opacity:0;pointer-events:none}.kon .chips span{display:inline-block;padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surf);font-size:13px}.kon .chips input:checked+span{background:var(--accent);color:#fff;border-color:var(--accent)}
-.out{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px}.out h3{margin:0 0 4px;font-size:16px}.out .hint{color:var(--mut);font-size:12.5px;margin:0 0 8px}.blk{border:1px solid var(--line);border-radius:10px;margin:6px 0;background:var(--surf)}.blk summary{cursor:pointer;padding:8px 12px;font-weight:600;list-style:none;display:flex;gap:8px;align-items:center}.blk summary::-webkit-details-marker{display:none}.blk summary i{font-style:normal;width:26px;height:26px;border-radius:50%;background:var(--soft);color:var(--accent);display:inline-flex;align-items:center;justify-content:center;font-size:12px}.blk summary em{font-style:normal;margin-left:auto;font-size:11.5px;color:var(--mut)}.blk div{padding:0 12px 10px;font-size:13px;color:var(--ink2)}.blk ul{margin:4px 0;padding-left:18px}.blk .src{font-size:12px;color:var(--mut)}.empty{color:var(--mut)}.out .cta .btn{display:inline-block;background:var(--accent);color:#fff;border-radius:999px;padding:7px 14px;text-decoration:none;font-weight:600}
-.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}@media(max-width:800px){.steps{grid-template-columns:1fr}}.step{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px}.step b{display:block;margin-bottom:4px}.step span{font-size:13px;color:var(--ink2)}.faq{margin-top:14px}.faq details{border-top:1px solid var(--line);padding:8px 0}.faq summary{cursor:pointer;font-weight:600}.faq p{margin:6px 0 0;color:var(--ink2);font-size:13px}
-.tg-first-message{margin-top:12px}.foot{margin-top:10px}.docl{display:grid;grid-template-columns:90px 1fr auto;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px}.docl small{color:var(--mut)}
-footer{font-size:12px;color:var(--mut);padding:6px 0}footer a{color:var(--accent)}
-/* продающий первый экран: компактная шапка-оффер, главная остаётся в один экран */
-.hero{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;background:var(--surf);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:12px;padding:8px 12px}
-.hero-t{flex:1 1 420px;min-width:0}.hero h2{margin:0 0 2px;font:700 clamp(17px,2.6vw,22px)/1.2 Georgia,serif}.hero .verdict{margin:0;padding:0;border:0;background:none;font:400 12.5px/1.35 system-ui,sans-serif;color:var(--ink2)}
-.hero-b{display:flex;flex-wrap:wrap;gap:6px}.hb{padding:7px 13px;border-radius:999px;border:1px solid var(--accent);color:var(--accent);font-weight:600;font-size:13px;text-decoration:none;white-space:nowrap}.hb.p{background:var(--accent);color:#fff}.hb:hover{opacity:.88}
-/* живость: подъём плиток, плавное появление, калькулятор рутины */
-.grid>.t{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.grid>.t:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,.10);border-color:var(--accent)}
-@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.js .grid>.t,.js .kpi,.js .hero{animation:rise .5s ease both}.grid>.t:nth-child(2){animation-delay:.05s}.grid>.t:nth-child(3){animation-delay:.1s}.grid>.t:nth-child(4){animation-delay:.15s}.grid>.t:nth-child(5){animation-delay:.2s}.grid>.t:nth-child(6){animation-delay:.25s}.grid>.t:nth-child(7){animation-delay:.3s}
-@media(prefers-reduced-motion:reduce){.js .grid>.t,.js .kpi,.js .hero{animation:none}.grid>.t{transition:none}.grid>.t:hover{transform:none}}
-.cc{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:10px}@media(max-width:800px){.cc{grid-template-columns:1fr}}
-.cc-in{display:flex;flex-direction:column;gap:14px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px 16px}.cc-in label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink2)}.cc-in label b{font:700 22px Georgia,serif;color:var(--ink)}.cc-in input[type=range]{width:100%;accent-color:var(--accent);height:28px}
-.cc-out{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start}.cc-k{background:var(--bg);border:1px solid var(--line);border-left:5px solid var(--warn);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px}.cc-k.good{border-left-color:var(--good)}.cc-k span{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}.cc-k b{font:700 clamp(20px,3.4vw,28px)/1.1 Georgia,serif}.cc-k small{font-size:12px;color:var(--ink2)}
-.cc-go{grid-column:1/-1;text-align:center;padding:12px 16px;font-size:15px}.cc-n{grid-column:1/-1;margin:0;font-size:12px;color:var(--mut)}
-/* приёмка 17.11.2026: во весь экран, кнопка «Написать» в потоке (не поверх меню) */
-.app{max-width:none;padding:10px clamp(12px,2.2vw,36px) 14px}.hd{padding-right:0;gap:6px 14px}.hd .cta{position:static;margin-left:auto;order:3}.tabs{flex:1 1 auto;justify-content:center;order:2}.hd h1{order:1}.stamp{order:4}
-@media(max-width:700px){.tabs{justify-content:flex-start;flex:1 1 100%}.hd .cta{margin-left:0}}
-.sec .cta{position:static;display:block;margin:12px 0 0}.sec .cta a{display:inline-block}
-#screen{flex:1;display:flex;flex-direction:column}#screen>.home{flex:1;display:flex;flex-direction:column;gap:6px}#screen>.home .grid{flex:1}
-.js #screen>.home.off{display:none}
-@media(min-width:1500px) and (min-height:900px){#screen .num{font-size:clamp(40px,5.6vh,64px)}#screen .tq{font-size:17px}#screen .tn{font-size:15px;-webkit-line-clamp:3}#screen .unit{font-size:14px}#screen .bar{font-size:13px}#screen .lg{font-size:13px}#screen .chips b{font-size:14px;padding:5px 10px}#screen .hint2,#screen .tv{font-size:14px}#screen .tv{max-height:none;justify-content:center}#screen .sq b{width:30px;height:30px;font-size:16px}.kpi b{font-size:22px}.hero h2{font-size:30px}.hero .verdict{font-size:14px}.hb{font-size:15px;padding:9px 18px}}
-</style></head><body><main class="app"><header class="hd"><h1>Автоматизация и дашборды <small>· для собственника</small></h1><nav class="tabs"><a href="#view=dashbordy" data-nav="dashbordy">Дашборды</a><a href="#view=raschet" data-nav="raschet">Посчитать</a><a href="#view=konstruktor" data-nav="konstruktor">Конструктор</a><a href="#view=produkty" data-nav="produkty">Обработки 1С</a><a href="#view=besplatno" data-nav="besplatno">Бесплатно</a><a href="#view=novoe" data-nav="novoe">Что нового</a><a href="#view=kak" data-nav="kak">Как работаю</a></nav><div class="cta"><a href="#view=kontakty">Написать</a></div><div class="stamp">Реестры панелей, обработок и калькуляторов на 17.11.2026 · Инфостарт на 17.11.2026 · примеры на вымышленных данных</div></header>
-<div id="screen"><section class="home" id="home"><div class="hero"><div class="hero-t"><h2>Цифры вашего бизнеса на одном экране, рутина - без вас</h2><p class="verdict">Главное: цифры бизнеса на одном экране с телефона, а рутина собирается сама. 3 демо-панелей, 11 обработок 1С (3 765 просмотров на Инфостарте), 8 бесплатных калькуляторов - без входа и установки.</p></div><div class="hero-b"><a class="hb p" href="https://t.me/pyankov_vv?text=%D0%9F%D0%B8%D1%88%D1%83%20%D1%81%D0%BE%20%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D1%8B%20%C2%AB%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE%3A%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%D1%8B%C2%BB.%0A%D0%A2%D0%B5%D0%BC%D0%B0%3A%20%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D0%B4%D0%B0%D1%88%D0%B1%D0%BE%D1%80%D0%B4%D1%8B.%0A%0A%D0%A7%D1%82%D0%BE%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%3A%20%0A%D0%93%D0%B4%D0%B5%20%D1%81%D0%B5%D0%B9%D1%87%D0%B0%D1%81%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5%3A%20%0A%D0%9C%D0%BE%D0%B9%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%3A%20" rel="noopener">Описать задачу в Telegram</a><a class="hb" href="#view=dashbordy">Демо-панели</a><a class="hb" href="https://avtomatizaciya.github.io/price/">Стоимость</a></div></div><div class="kpis"><div class="kpi good"><span class="kl">Демо-панелей</span><b>3</b><span class="kd">открываются с телефона</span></div><div class="kpi info"><span class="kl">Обработок 1С</span><b>11</b><span class="kd">на Инфостарте</span></div><div class="kpi info"><span class="kl">Просмотров</span><b>3 765</b><span class="kd">карточек обработок</span></div><div class="kpi info"><span class="kl">Загрузок</span><b>12</b><span class="kd">за всё время</span></div><div class="kpi good"><span class="kl">Калькуляторов</span><b>8</b><span class="kd">бесплатно</span></div><div class="kpi info"><span class="kl">Источников</span><b>6</b><span class="kd">1С, CRM, банк, таблицы</span></div><div class="kpi info"><span class="kl">Данные на</span><b>17.11.2026</b><span class="kd">обновляется каждый день</span></div></div><div class="grid"><a class="t good" data-go="dashbordy" href="#view=dashbordy"><span class="tq">Что увидит собственник?<span class="go">›</span></span><span class="tb"><span class="num">3</span><span class="unit">демо-панелей</span></span><span class="tv"><span class="sq"><b class="good" title="Панель бухфирмы">1</b><b class="info" title="Панель управления бизнесом">2</b><b class="good" title="Управленческий отчёт и реестр договоров">3</b></span><span class="hint2">до 7 плиток-вопросов, спуск до документа</span></span><span class="tn">Деньги, долги и прибыль с телефона без входа. Данные примеров вымышленные.</span></a><a class="t info" data-go="konstruktor" href="#view=konstruktor"><span class="tq">Откуда данные?<span class="go">›</span></span><span class="tb"><span class="num">6</span><span class="unit">источников</span></span><span class="tv"><span class="chips"><b>1С</b><b>Битрикс24</b><b>amoCRM</b><b>Банк и выписки</b><b>Google Таблицы, Excel</b><b>Telegram, ВК, боты</b></span></span><span class="tn">Данные остаются там, где лежат. Отметьте источники - увидите состав своего дашборда.</span></a><a class="t info" data-go="produkty" href="#view=produkty"><span class="tq">Что готово для 1С?<span class="go">›</span></span><span class="tb"><span class="num">11</span><span class="unit">обработок на Инфостарте</span></span><span class="tv"><span class="bars"><span class="bar"><span>Отчёт директору одним файлом</span><span class="bt"><i style="width:100%"></i></span><span class="bv">737</span></span><span class="bar"><span>Контроль договоров</span><span class="bt"><i style="width:73%"></i></span><span class="bv">538</span></span><span class="bar"><span>Управленческие отчёты в Google Таблицы</span><span class="bt"><i style="width:61%"></i></span><span class="bv">453</span></span><span class="bar"><span>Начисление процентов по займам и кредитам</span><span class="bt"><i style="width:61%"></i></span><span class="bv">453</span></span><span class="bar"><span>Приём-передача дел главного бухгалтера</span><span class="bt"><i style="width:60%"></i></span><span class="bv">444</span></span></span></span><span class="tn">3 765 просмотров и 12 загрузок карточек; данные Инфостарта на 17.11.2026.</span></a><a class="t good" data-go="besplatno" href="#view=besplatno"><span class="tq">Чем пользоваться бесплатно?<span class="go">›</span></span><span class="tb"><span class="num">8</span><span class="unit">калькуляторов</span></span><span class="tv"><span class="stk"><i style="width:25.0%;background:#1f4d3a" title="Долги и личные финансы: 2"></i><i style="width:25.0%;background:#2e8b57" title="Налоги и бизнес: 2"></i><i style="width:25.0%;background:#c98a10" title="Право и суды: 2"></i><i style="width:12.5%;background:#4f5b66" title="Господдержка: 1"></i><i style="width:12.5%;background:#8b8a85" title="Дом и коммунальные услуги: 1"></i></span><span class="lg"><span><i style="background:#1f4d3a"></i>Долги и личные финансы 2</span><span><i style="background:#2e8b57"></i>Налоги и бизнес 2</span><span><i style="background:#c98a10"></i>Право и суды 2</span><span><i style="background:#4f5b66"></i>Господдержка 1</span><span><i style="background:#8b8a85"></i>Дом и коммунальные услуги 1</span></span></span><span class="tn">Без регистрации, по нормам 2026 года; плюс разбор «красная группа ЗСК».</span></a><a class="t warn" data-go="raschet" href="#view=raschet"><span class="tq">Сколько стоит ваша рутина?<span class="go">›</span></span><span class="tb"><span class="num">77 940</span><span class="unit">₽ в месяц</span></span><span class="tv"><span class="chips"><b>3 человека</b><b>10 ч в неделю</b><b>600 ₽ за час</b></span><span class="hint2">пример: сдвиньте ползунки и получите свою цифру</span></span><span class="tn">Сколько уходит на ручную работу и сколько вернёт автоматизация - по вашим цифрам.</span></a><a class="t info" data-go="kak" href="#view=kak"><span class="tq">Как работаю?<span class="go">›</span></span><span class="tb"><span class="num">3</span><span class="unit">шага</span></span><span class="tv"><span class="sq"><b class="info">1</b><b class="info">2</b><b class="info">3</b></span><span class="hint2">рутина → решение на примере → внедрение и сопровождение</span></span><span class="tn">Вы описываете, что отнимает время; я показываю решение до начала работы.</span></a><a class="t warn" data-go="kontakty" href="#view=kontakty"><span class="tq">С чего начать?<span class="go">›</span></span><span class="tb"><span class="num">1</span><span class="unit">сообщение</span></span><span class="tv"><span class="chips"><b>Telegram</b><b>черновик готов</b><b>без паспортов</b></span></span><span class="tn">Напишите одним сообщением - отвечу, что из рутины можно убрать и как это будет выглядеть.</span></a></div></section>
-<section class="sec" id="dashbordy" data-view="dashbordy"><div class="sh info"><a class="back" href="#view=home">‹ На главную</a><span class="st">Дашборды</span><span class="sb">3 демо</span></div><p class="lead">Каждая панель: до 7 плиток-вопросов, фильтры в шапке, спуск до документа. Данные вымышленные, открываются без входа.</p><div class="calcs"><a class="calc spot" href="https://avtomatizaciya.github.io/panel-buhfirma-demo/" rel="noopener"><small>демо, данные вымышленные</small><b>Панель бухфирмы</b><span>Счета, оплаты и порядок в учёте бухфирмы: кто не платит, когда платят, Парето клиентов</span><em>Открыть →</em></a><a class="calc spot" href="https://avtomatizaciya.github.io/panel-prodazh-demo/" rel="noopener"><small>демо, данные вымышленные</small><b>Панель управления бизнесом</b><span>7 плиток: деньги, выручка, прибыль, долги, план-факт, налоги, тревоги; период, отрасль, юрлицо в шапке</span><em>Открыть →</em></a><a class="calc spot" href="https://valeraslim86-afk.github.io/showroom/upravlenie.html" rel="noopener"><small>демо, данные вымышленные</small><b>Управленческий отчёт и реестр договоров</b><span>Выручка, деньги, долги по месяцам; отдельно реестр договоров с проверкой сканов</span><em>Открыть →</em></a></div></section><section class="sec" id="raschet" data-view="raschet"><div class="sh warn"><a class="back" href="#view=home">‹ На главную</a><span class="st">Сколько стоит ваша рутина</span><span class="sb" id="cc-big">78 000 ₽</span></div>
-<p class="lead">Сдвигайте ползунки: цифры пересчитываются сразу. Это арифметика по вашим данным, а не обещание результата.</p>
-<div class="cc"><div class="cc-in">
-<label>Сколько человек заняты ручной работой <b id="v-p">3</b><input type="range" id="i-p" min="1" max="30" value="3"></label>
-<label>Часов рутины на человека в неделю <b id="v-h">10</b><input type="range" id="i-h" min="1" max="40" value="10"></label>
-<label>Стоимость часа, ₽ (зарплата с налогами) <b id="v-r">600</b><input type="range" id="i-r" min="200" max="3000" step="50" value="600"></label>
-<label>Какую долю рутины хотите убрать, % <b id="v-s">60</b><input type="range" id="i-s" min="10" max="90" step="5" value="60"></label>
-</div><div class="cc-out">
-<div class="cc-k"><span>Рутина стоит</span><b id="o-c">0</b><small>в месяц</small></div>
-<div class="cc-k"><span>Часов в месяц</span><b id="o-h">0</b><small>уходит на ручную работу</small></div>
-<div class="cc-k good"><span>Можно вернуть</span><b id="o-m">0</b><small>в месяц</small></div>
-<div class="cc-k good"><span>За год</span><b id="o-y">0</b><small>и <i id="o-f">0</i> ч свободного времени в месяц</small></div>
-<a class="hb p cc-go" id="cc-go" href="#" rel="noopener">Обсудить мою рутину в Telegram</a>
-<p class="cc-n">В сообщение подставятся ваши цифры, без паспортов и телефонов. Точную экономию покажу на вашем примере до начала работы.</p>
-</div></div></section><section class="sec" id="konstruktor" data-view="konstruktor"><div class="sh info"><a class="back" href="#view=home">‹ На главную</a><span class="st">Конструктор</span><span class="sb">6 источников</span></div><p class="lead">Отметьте, где лежат данные и что хотите видеть - справа появится состав дашборда.</p><div class="kon rv">
-<div>
-<fieldset><legend>1. Где лежат ваши данные</legend><div class="chips" id="src">
-<label><input type="checkbox" value="1c" checked><span>1С</span></label>
-<label><input type="checkbox" value="b24"><span>Битрикс24</span></label>
-<label><input type="checkbox" value="amo"><span>amoCRM</span></label>
-<label><input type="checkbox" value="bank" checked><span>Банк и выписки</span></label>
-<label><input type="checkbox" value="gs"><span>Google Таблицы, Excel</span></label>
-<label><input type="checkbox" value="bot"><span>Telegram, ВК, боты</span></label>
-</div></fieldset>
-<fieldset><legend>2. Что хотите видеть</legend><div class="chips" id="goal">
-<label><input type="checkbox" value="money" checked><span>Деньги и прибыль</span></label>
-<label><input type="checkbox" value="sales" checked><span>Продажи и воронка</span></label>
-<label><input type="checkbox" value="debt"><span>Долги и сроки</span></label>
-<label><input type="checkbox" value="docs"><span>Договоры и документы</span></label>
-<label><input type="checkbox" value="clients"><span>Заявки и ответы клиентам</span></label>
-</div></fieldset>
-</div>
-<div class="out" id="out" aria-live="polite"></div>
-</div>
-</section><section class="sec" id="produkty" data-view="produkty"><div class="sh info"><a class="back" href="#view=home">‹ На главную</a><span class="st">Обработки 1С</span><span class="sb">11 шт.</span></div><p class="lead">Готовые внешние обработки на Инфостарте: 3 765 просмотров, 12 загрузок. Нажмите на карточку - откроется страница обработки.</p><div class="calcs"><a class="calc spot" href="https://infostart.ru/1c/tools/2766557/" rel="noopener"><small>737 просмотров · 0 загрузок · рейтинг 2</small><b>Отчёт директору одним файлом</b><span>Внешняя обработка, конфигурацию не меняет. Опубликована 18.09.2026.</span><em>Открыть на Инфостарте →</em></a><a class="calc spot" href="https://infostart.ru/1c/reports/2795148/" rel="noopener"><small>538 просмотров · 2 загрузок · рейтинг 1</small><b>Контроль договоров</b><span>Внешняя обработка, конфигурацию не меняет. Опубликована 23.09.2026.</span><em>Открыть на Инфостарте →</em></a><a class="calc spot" href="https://infostart.ru/1c/reports/2795216/" rel="noopener"><small>453 просмотров · 0 загрузок</small><b>Управленческие отчёты в Google Таблицы</b><span>Внешняя обработка, конфигурацию не меняет. Опубликована 30.09.2026.</span><em>Открыть на Инфостарте →</em></a><a class="calc spot" href="https://infostart.ru/1c/tools/2803090/" rel="noopener"><small>453 просмотров · 2 загрузок</small><b>Начисление процентов по займам и кредитам</b><span>Внешняя обработка, конфигурацию не меняет. Опубликована 30.09.2026.</span><em>Открыть на Инфостарте →</em></a><a class="calc spot" href="https://infostart.ru/1c/reports/2805991/" rel="noopener"><small>444 просмотров · 2 загрузок · рейтинг 1</small><b>Приём-передача дел главного бухгалтера</b><span>Внешняя обработка, конфигурацию не меняет. Опубликована 02.10.2026.</span><em>Открыть на Инфостарте →</em></a><a class="calc spot" href="https://infostart.ru/1c/reports/2814243/" rel="noopener"><small>304 просмотров · 1 загрузок · рейтинг 1</small><b>Как читать ОСВ в 1С: объяснение остатков и поиск ошибок</b><span>Внешняя обработка, конфигурацию не меняет. Опубликована 10.10.2026.</span><em>Открыть на Инфостарте →</em></a><a class="calc spot" href="https://infostart.ru/1c/reports/2807950/" rel="noopener"><small>248 просмотров · 0 загрузок</small><b>Комиссия эквайринга под счёт-фактуру</b><span>Внешняя обработка, конфигурацию не меняет. Опубликована 06.10.2026.</span><em>Открыть на Инфостарте →</em></a><a class="calc spot" href="https://infostart.ru/1c/tools/2810247/" rel="noopener"><small>207 просмотров · 2 загрузок</small><b>Заполнение контрагентов по ИНН</b><span>Внешняя обработка, конфигурацию не меняет. Опубликована 07.10.2026.</span><em>Открыть на Инфостарте →</em></a><a class="calc spot" href="https://infostart.ru/1c/tools/2814667/" rel="noopener"><small>151 просмотров · 2 загрузок · рейтинг 5</small><b>Выгрузка типовых отчётов</b><span>Внешняя обработка, конфигурацию не меняет. Опубликована 12.10.2026.</span><em>Открыть на Инфостарте →</em></a><a class="calc spot" href="https://infostart.ru/1c/tools/2818140/" rel="noopener"><small>149 просмотров · 1 загрузок</small><b>Разноска банковских выписок</b><span>Внешняя обработка, конфигурацию не меняет. Опубликована 16.10.2026.</span><em>Открыть на Инфостарте →</em></a><a class="calc spot" href="https://infostart.ru/1c/reports/2821205/" rel="noopener"><small>81 просмотров · 0 загрузок</small><b>Настройка состава OData</b><span>Внешняя обработка, конфигурацию не меняет. Опубликована 20.10.2026.</span><em>Открыть на Инфостарте →</em></a></div></section><section class="sec" id="besplatno" data-view="besplatno"><div class="sh info"><a class="back" href="#view=home">‹ На главную</a><span class="st">Бесплатно</span><span class="sb">8 калькуляторов</span></div><p class="lead">Работают в браузере и на телефоне, без регистрации. Расчёты по нормам 2026 года, носят справочный характер.</p><div class="calcs"><!-- calcs:start (собирается из ~/.claude/shared/калькуляторы.json) -->
-<a class="calc spot" href="https://kalkulyator-dolgov.github.io/" rel="noopener"><small>Тем, у кого кредиты</small><b>Калькулятор погашения долгов</b><span>Лавина, снежный ком, рефинансирование: как быстрее и дешевле закрыть кредиты</span><em>Открыть →</em></a><a class="calc spot" href="https://kalkulyator-bankrotstva.github.io/" rel="noopener"><small>Тем, у кого кредиты</small><b>Подходит ли мне банкротство</b><span>МФЦ или суд, стоимость, сроки и риски за 2 минуты</span><em>Открыть →</em></a><a class="calc spot" href="https://kalkulyator-nalogov.github.io/" rel="noopener"><small>ИП и бизнесу</small><b>Налоговый калькулятор</b><span>Какой налоговый режим выгоднее для ИП и самозанятых</span><em>Открыть →</em></a><a class="calc spot" href="https://kalkulyator-mastera.github.io/" rel="noopener"><small>ИП и бизнесу</small><b>Себестоимость услуг мастера</b><span>Сколько на самом деле зарабатывает мастер красоты</span><em>Открыть →</em></a><a class="calc spot" href="https://kalkulyator-yurista.github.io/" rel="noopener"><small>Юристам и работникам</small><b>Калькулятор юриста</b><span>Госпошлина в суд и расчёты по иску</span><em>Открыть →</em></a><a class="calc spot" href="https://kalkulyator-soc-kontrakta.github.io/" rel="noopener"><small>Начинающим бизнес</small><b>Социальный контракт</b><span>Сколько может дать государство на своё дело, работу или трудную ситуацию</span><em>Открыть →</em></a><a class="calc spot" href="https://yurist-yaroslavl.github.io/" rel="noopener"><small>Юристам и работникам</small><b>Юридическая помощь: компенсация и сроки</b><span>Компенсация за задержку зарплаты по ст. 236 ТК и последний день для подачи жалобы или иска</span><em>Открыть →</em></a><a class="calc spot" href="https://avtomatizaciya.github.io/kalkulyator-zhkh/" rel="noopener"><small>Дом и коммунальные услуги</small><b>Проверка квитанции ЖКХ</b><span>Проверка арифметики по введенному тарифу, показаниям и нормативу; сравнение начислений</span><em>Открыть →</em></a>
-<!-- calcs:end --><a class="calc spot" href="https://razbor-zsk.github.io/?from=portfolio" rel="noopener"><small>Для ООО и ИП</small><b>Красная группа ЗСК: что делать</b><span>Как выбрать порядок обращения в банк, ЦБ или МВК, проверить сроки и собрать документы.</span><em>Читать разбор →</em></a></div></section><section class="sec" id="novoe" data-view="novoe"><div class="sh info"><a class="back" href="#view=home">‹ На главную</a><span class="st">Что нового</span><span class="sb">11 за 8 недель</span></div><p class="lead">Публикации обработок и демо-панелей по неделям, по датам из реестров.</p><div class="tw"><table><tr><th>Неделя</th><th>Публикаций</th></tr><tr><td>28.09.2026 - 04.10.2026</td><td>3</td></tr><tr><td>05.10.2026 - 11.10.2026</td><td>3</td></tr><tr><td>12.10.2026 - 18.10.2026</td><td>4</td></tr><tr><td>19.10.2026 - 25.10.2026</td><td>1</td></tr><tr><td>26.10.2026 - 01.11.2026</td><td>0</td></tr><tr><td>02.11.2026 - 08.11.2026</td><td>0</td></tr><tr><td>09.11.2026 - 15.11.2026</td><td>0</td></tr><tr><td>16.11.2026 - 22.11.2026</td><td>0</td></tr></table></div><div class="list"><div class="docl"><span>20.10.2026</span><a href="https://infostart.ru/1c/reports/2821205/" rel="noopener">Настройка состава OData</a><small>81 просмотров</small></div><div class="docl"><span>16.10.2026</span><a href="https://infostart.ru/1c/tools/2818140/" rel="noopener">Разноска банковских выписок</a><small>149 просмотров</small></div><div class="docl"><span>12.10.2026</span><a href="https://infostart.ru/1c/tools/2814667/" rel="noopener">Выгрузка типовых отчётов</a><small>151 просмотров</small></div><div class="docl"><span>10.10.2026</span><a href="https://infostart.ru/1c/reports/2814243/" rel="noopener">Как читать ОСВ в 1С: объяснение остатков и поиск ошибок</a><small>304 просмотров</small></div><div class="docl"><span>07.10.2026</span><a href="https://infostart.ru/1c/tools/2810247/" rel="noopener">Заполнение контрагентов по ИНН</a><small>207 просмотров</small></div><div class="docl"><span>06.10.2026</span><a href="https://infostart.ru/1c/reports/2807950/" rel="noopener">Комиссия эквайринга под счёт-фактуру</a><small>248 просмотров</small></div><div class="docl"><span>02.10.2026</span><a href="https://infostart.ru/1c/reports/2805991/" rel="noopener">Приём-передача дел главного бухгалтера</a><small>444 просмотров</small></div><div class="docl"><span>30.09.2026</span><a href="https://infostart.ru/1c/reports/2795216/" rel="noopener">Управленческие отчёты в Google Таблицы</a><small>453 просмотров</small></div><div class="docl"><span>30.09.2026</span><a href="https://infostart.ru/1c/tools/2803090/" rel="noopener">Начисление процентов по займам и кредитам</a><small>453 просмотров</small></div><div class="docl"><span>23.09.2026</span><a href="https://infostart.ru/1c/reports/2795148/" rel="noopener">Контроль договоров</a><small>538 просмотров</small></div><div class="docl"><span>18.09.2026</span><a href="https://infostart.ru/1c/tools/2766557/" rel="noopener">Отчёт директору одним файлом</a><small>737 просмотров</small></div></div></section><section class="sec" id="kak" data-view="kak"><div class="sh info"><a class="back" href="#view=home">‹ На главную</a><span class="st">Как работаю</span><span class="sb">3 шага</span></div><p class="lead">От описания рутины до внедрения и сопровождения.</p><div class="steps rv">
-<div class="step"><b>Вы описываете рутину</b><span>Что в учёте или отчётах забирает больше всего времени. Достаточно одного сообщения.</span></div>
-<div class="step"><b>Показываю решение</b><span>Готовая обработка или дашборд на примере. Вы видите, как это будет выглядеть, до начала работы.</span></div>
-<div class="step"><b>Внедряю и сопровождаю</b><span>Подключаю к вашей базе и проверяю на ваших данных, затем остаюсь на связи.</span></div>
-</div>
-<div class="faq rv" style="margin-top:28px">
-<details><summary>Нужно ли менять конфигурацию 1С?</summary><p>Нет. Внешние обработки подключаются как обычный файл, конфигурацию они не меняют.</p></details>
-<details><summary>Что делать, если нужно под мою задачу?</summary><p>Напишите, что забирает время. Часть задач закрывается готовыми обработками, часть собирается под вас.</p></details>
-<details><summary>Куда уходят мои данные?</summary><p>Дашборды собираются из данных там, где они уже лежат: 1С, Google Таблицы, банк. В примерах на этой странице данные вымышленные.</p></details>
-<details><summary>Можно сначала посмотреть?</summary><p>Да. Примеры дашбордов и калькуляторы открываются без регистрации, обработки описаны на Инфостарте со скриншотами.</p></details>
-</div>
-</section><section class="sec" id="kontakty" data-view="kontakty"><div class="sh info"><a class="back" href="#view=home">‹ На главную</a><span class="st">Написать</span><span class="sb">1 сообщение</span></div><p class="lead">Напишите одним сообщением, что отнимает время, и я отвечу, что из этого можно убрать.</p><section class="tg-first-message" aria-labelledby="tg-contact-title">
-<h2 id="tg-contact-title">Разобрать ситуацию с человеком</h2>
-<a class="tg-button" href="https://t.me/pyankov_vv?text=%D0%9F%D0%B8%D1%88%D1%83%20%D1%81%D0%BE%20%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D1%8B%20%C2%AB%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE%3A%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%D1%8B%C2%BB.%0A%D0%A2%D0%B5%D0%BC%D0%B0%3A%20%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D0%B4%D0%B0%D1%88%D0%B1%D0%BE%D1%80%D0%B4%D1%8B.%0A%0A%D0%A7%D1%82%D0%BE%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%3A%20%0A%D0%93%D0%B4%D0%B5%20%D1%81%D0%B5%D0%B9%D1%87%D0%B0%D1%81%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5%3A%20%0A%D0%9C%D0%BE%D0%B9%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%3A%20" rel="noopener">Написать в Telegram</a>
-<p>Откроется чат с @pyankov_vv и черновик по теме «Автоматизация и дашборды». Допишите свои данные и нажмите «Отправить».</p>
-<details><summary>Посмотреть и скопировать текст сообщения</summary>
-<pre data-tg-draft>Пишу со страницы «Портфолио: автоматизация и разборы».
-Тема: Автоматизация и дашборды.
+<section id="schet"><div class="wrap"><span class="ey">Калькулятор</span><h2>Сколько стоит ваша ручная рутина</h2>
+<p class="sub">Передвиньте ползунки. Расчёт прикидочный, но показывает порядок цифр.</p>
+<div class="calc"><div class="cin">
+<div><label>Сколько человек занимаются рутиной <b id="vp">3</b></label><input id="ip" type="range" min="1" max="30" value="3"></div>
+<div><label>Часов в неделю на каждого <b id="vh">10</b></label><input id="ih" type="range" min="1" max="40" value="10"></div>
+<div><label>Стоимость часа, ₽ <b id="vr">600</b></label><input id="ir" type="range" min="200" max="3000" step="50" value="600"></div>
+<div><label>Какую часть можно автоматизировать, % <b id="vs">60</b></label><input id="is" type="range" min="10" max="90" step="5" value="60"></div></div>
+<div class="cout"><small>Рутина обходится вам в месяц</small><div class="big" id="oc">0</div>
+<div class="row"><span>Часов в месяц</span><b id="oh">0</b></div><div class="row"><span>Вернётся в месяц</span><b id="om">0</b></div><div class="row"><span>За год</span><b id="oy">0</b></div>
+<a class="btn" id="cg" href="https://t.me/pyankov_vv" rel="noopener" style="margin-top:22px">Обсудить мои цифры <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
+<p class="note">Расчёт справочный: реальный эффект зависит от процессов и считается после разбора вашей задачи.</p></div></section>
 
-Что хочу автоматизировать:&#32;
-Где сейчас данные:&#32;
-Мой вопрос: </pre>
-<button type="button" data-tg-copy hidden>Скопировать текст</button>
-<span class="tg-copy-status" role="status" aria-live="polite"></span>
-</details><p>Если Telegram не подставил текст, скопируйте его отсюда. Для первого сообщения не нужны паспортные данные или номера договоров.</p>
-</section></section></div>
-<footer><div class="w">Контакты: <a href="https://t.me/pyankov_vv?text=%D0%9F%D0%B8%D1%88%D1%83%20%D1%81%D0%BE%20%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D1%8B%20%C2%AB%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE%3A%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%D1%8B%C2%BB.%0A%D0%A2%D0%B5%D0%BC%D0%B0%3A%20%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D0%B4%D0%B0%D1%88%D0%B1%D0%BE%D1%80%D0%B4%D1%8B.%0A%0A%D0%A7%D1%82%D0%BE%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%3A%20%0A%D0%93%D0%B4%D0%B5%20%D1%81%D0%B5%D0%B9%D1%87%D0%B0%D1%81%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5%3A%20%0A%D0%9C%D0%BE%D0%B9%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%3A%20">Написать в Telegram</a><br>Обработки для 1С распространяются через Инфостарт, калькуляторы бесплатные. Расчёты носят справочный характер.</div></footer></main>
-<script src="telegram-contact.js" defer></script>
-<script>document.documentElement.classList.add('js');(function(){var MAP={raschet:'raschet',kalkulyatory:'besplatno',razbory:'besplatno',kontakty:'kontakty',konstruktor:'konstruktor',dashbordy:'dashbordy',produkty:'produkty',kak:'kak'};var VIEWS=["dashbordy", "raschet", "konstruktor", "produkty", "besplatno", "novoe", "kak", "kontakty"];
-function current(){var h=location.hash.replace(/^#/,'');var m=/(?:^|&)view=([a-z]+)/.exec(h);var v=m?m[1]:(MAP[h]||'home');return VIEWS.indexOf(v)>-1?v:'home'}
-function render(){var v=current();document.getElementById('home').classList.toggle('off',v!=='home');document.querySelectorAll('.sec').forEach(function(s){s.classList.toggle('on',s.dataset.view===v)});document.querySelectorAll('[data-nav]').forEach(function(a){a.classList.toggle('on',a.dataset.nav===v)});window.scrollTo(0,0)}
-window.addEventListener('hashchange',render);render();})();</script>
+<section class="alt" id="primery"><div class="wrap"><span class="ey">Примеры</span><h2>Посмотрите вживую, а не по описанию</h2>
+<p class="sub">Демо-панели на вымышленных данных открываются по прямой ссылке. Никаких данных клиентов на сайте нет.</p>
+<div class="g3"><a class="c rv" href="https://avtomatizaciya.github.io/panel-buhfirma-demo/" rel="noopener"><span class="meta">Демо-панель · вымышленные данные</span><h3>Панель бухгалтерской фирмы</h3><p>Кто не платит, когда платят, какие клиенты дают основную выручку.</p><span class="go">Смотреть панель <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="c rv" href="https://avtomatizaciya.github.io/panel-prodazh-demo/" rel="noopener"><span class="meta">Демо-панель · вымышленные данные</span><h3>Панель управления бизнесом</h3><p>Деньги, выручка, прибыль, долги, план-факт, налоги и тревоги - семь плиток на одном экране.</p><span class="go">Смотреть панель <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="c rv" href="https://valeraslim86-afk.github.io/showroom/upravlenie.html" rel="noopener"><span class="meta">Демо-панель · вымышленные данные</span><h3>Управленческий отчёт и реестр договоров</h3><p>Выручка, деньги и долги по месяцам; реестр договоров с проверкой сканов.</p><span class="go">Смотреть панель <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+<h2 style="margin-top:72px;font-size:clamp(24px,3vw,34px)">Готовые обработки для 1С</h2><p class="sub">Опубликованы на Инфостарте, конфигурацию не меняют.</p><div class="g3"><a class="c rv" href="https://infostart.ru/1c/tools/2766557/" rel="noopener"><span class="meta">737 просмотров · 0 загрузок</span><h3>Отчёт директору одним файлом</h3><p>Внешняя обработка для 1С, конфигурацию не меняет.</p><span class="go">Открыть на Инфостарте <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="c rv" href="https://infostart.ru/1c/reports/2795148/" rel="noopener"><span class="meta">538 просмотров · 2 загрузок</span><h3>Контроль договоров</h3><p>Внешняя обработка для 1С, конфигурацию не меняет.</p><span class="go">Открыть на Инфостарте <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="c rv" href="https://infostart.ru/1c/reports/2795216/" rel="noopener"><span class="meta">453 просмотров · 0 загрузок</span><h3>Управленческие отчёты в Google Таблицы</h3><p>Внешняя обработка для 1С, конфигурацию не меняет.</p><span class="go">Открыть на Инфостарте <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="c rv" href="https://infostart.ru/1c/tools/2803090/" rel="noopener"><span class="meta">453 просмотров · 2 загрузок</span><h3>Начисление процентов по займам и кредитам</h3><p>Внешняя обработка для 1С, конфигурацию не меняет.</p><span class="go">Открыть на Инфостарте <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="c rv" href="https://infostart.ru/1c/reports/2805991/" rel="noopener"><span class="meta">444 просмотров · 2 загрузок</span><h3>Приём-передача дел главного бухгалтера</h3><p>Внешняя обработка для 1С, конфигурацию не меняет.</p><span class="go">Открыть на Инфостарте <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="c rv" href="https://infostart.ru/1c/reports/2814243/" rel="noopener"><span class="meta">304 просмотров · 1 загрузок</span><h3>Как читать ОСВ в 1С: объяснение остатков и поиск ошибок</h3><p>Внешняя обработка для 1С, конфигурацию не меняет.</p><span class="go">Открыть на Инфостарте <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+<h2 style="margin-top:72px;font-size:clamp(24px,3vw,34px)">Бесплатные калькуляторы</h2><p class="sub">Работают в браузере и на телефоне, без регистрации.</p><div class="g3"><a class="c rv" href="https://kalkulyator-dolgov.github.io/" rel="noopener"><span class="meta">Личные финансы</span><h3>Калькулятор погашения долгов</h3><p>Лавина, снежный ком, рефинансирование: как быстрее и дешевле закрыть кредиты</p><span class="go">Открыть <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="c rv" href="https://kalkulyator-bankrotstva.github.io/" rel="noopener"><span class="meta">Личные финансы</span><h3>Подходит ли мне банкротство</h3><p>МФЦ или суд, стоимость, сроки и риски за 2 минуты</p><span class="go">Открыть <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="c rv" href="https://kalkulyator-nalogov.github.io/" rel="noopener"><span class="meta">ИП и бизнес</span><h3>Налоговый калькулятор</h3><p>Какой налоговый режим выгоднее для ИП и самозанятых</p><span class="go">Открыть <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="c rv" href="https://kalkulyator-mastera.github.io/" rel="noopener"><span class="meta">ИП и бизнес</span><h3>Себестоимость услуг мастера</h3><p>Сколько на самом деле зарабатывает мастер красоты</p><span class="go">Открыть <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="c rv" href="https://kalkulyator-yurista.github.io/" rel="noopener"><span class="meta">Право и работа</span><h3>Калькулятор юриста</h3><p>Госпошлина в суд и расчёты по иску</p><span class="go">Открыть <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a class="c rv" href="https://kalkulyator-soc-kontrakta.github.io/" rel="noopener"><span class="meta">Старт бизнеса</span><h3>Социальный контракт</h3><p>Сколько может дать государство на своё дело, работу или трудную ситуацию</p><span class="go">Открыть <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div></div></section>
+
+<section><div class="wrap"><div class="fin"><h2>Расскажите, что считаете руками</h2><p>Напишите в Telegram одной фразой. Отвечу по делу и покажу, как это выглядит на панели.</p>
+<div class="cta"><a class="btn p" href="https://t.me/pyankov_vv?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%82%D0%B0%D0%BA%D1%83%D1%8E%20%D0%BF%D0%B0%D0%BD%D0%B5%D0%BB%D1%8C%20%D0%B4%D0%BB%D1%8F%20%D1%81%D0%B2%D0%BE%D0%B5%D0%B3%D0%BE%20%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D0%B0.%20%D0%A0%D0%B0%D1%81%D1%81%D0%BA%D0%B0%D0%B6%D1%83%2C%20%D1%87%D0%B5%D0%BC%20%D0%B7%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D1%8E%D1%81%D1%8C%3A%20" rel="noopener">Написать в Telegram <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn" href="price/">Посмотреть стоимость</a></div></div></div></section>
+</main>
+<footer><div class="wrap"><span>Автоматизация и дашборды для бизнеса · данные на 17.11.2026</span><span><a href="https://t.me/pyankov_vv" rel="noopener">Telegram</a> · <a href="https://vk.ru/pyankov_vv" rel="noopener">ВКонтакте</a> · <a href="price/">Стоимость</a></span></div></footer>
+
 <script>
-(function(){
-var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-var data=[2.4,2.6,2.9,3.5,1.9,2.7,3.2,3.4,2.9,3.6,3.9,4.1],c=document.getElementById("chart")||document.createElement("div");
-data.forEach(function(v){var i=document.createElement("i");i.dataset.h=Math.round(v/4.3*100);c.appendChild(i)});
-function bars(){c.querySelectorAll("i").forEach(function(i,k){setTimeout(function(){i.style.height=i.dataset.h+"%"},reduce?0:k*60)})}
-function count(el){var t=parseFloat(el.dataset.n),d=+el.dataset.d,s=el.dataset.s||"";if(reduce){el.textContent=t.toFixed(d).replace(".",",")+s;return}var st=performance.now();(function f(n){var p=Math.min((n-st)/1100,1);el.textContent=(t*(1-Math.pow(1-p,3))).toFixed(d).replace(".",",")+s;if(p<1)requestAnimationFrame(f)})(st)}
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;e.target.classList.add("in");if(e.target.classList.contains("dash")){bars();e.target.querySelectorAll("[data-n]").forEach(count)}io.unobserve(e.target)})},{threshold:.15});
-
-document.addEventListener("pointermove",function(e){var s=e.target.closest&&e.target.closest(".spot");if(!s)return;var r=s.getBoundingClientRect();s.style.setProperty("--mx",(e.clientX-r.left)+"px");s.style.setProperty("--my",(e.clientY-r.top)+"px")});
-
-var G={
- money:{i:"₽",t:"Деньги и прибыль",from:["1c","bank","gs"],d:"Выручка, себестоимость и прибыль по месяцам, движение денег, остаток на счетах, расходы по статьям.",ul:["Выручка и прибыль по месяцам","Поступления и платежи, остаток денег","Куда уходят деньги: расходы по статьям"]},
- sales:{i:"▼",t:"Продажи и воронка",from:["b24","amo","1c","gs"],d:"Сколько заявок дошло до оплаты, где воронка теряет сделки и сколько денег в ней лежит.",ul:["Воронка от заявки до оплаты","Сделки и суммы на каждом этапе","Доля, которая доходит до денег"]},
- debt:{i:"⏱",t:"Долги и сроки",from:["1c","bank","gs"],d:"Кто должен вам и кому должны вы, по каким срокам.",ul:["Дебиторская и кредиторская задолженность","Просрочка по срокам","Ближайшие платежи и налоги"]},
- docs:{i:"▤",t:"Договоры и документы",from:["1c"],d:"Где нет скана договора, где дубли и где договор не совпадает с платежом.",ul:["Покрытие договоров сканами по видам","Дубли и опечатки с рекомендацией","Расхождения договора и платежа"]},
- clients:{i:"✉",t:"Заявки и ответы клиентам",from:["bot","b24","amo"],d:"Бот в Telegram или ВК принимает заявки и отвечает на типовые вопросы. Заявки видны в дашборде.",ul:["Приём заявок ботом","Ответы на типовые вопросы","Число заявок по дням и источникам"]}
-};
-var N={"1c":"1С",b24:"Битрикс24",amo:"amoCRM",bank:"Банк",gs:"Таблицы",bot:"Telegram, ВК"};
-function sel(id){return [].slice.call(document.querySelectorAll("#"+id+" input:checked")).map(function(x){return x.value})}
-function draw(){
- var s=sel("src"),g=sel("goal"),o=document.getElementById("out"),h="";
- if(!g.length){o.innerHTML='<div class="empty">Отметьте, что хотите видеть, и здесь появится состав дашборда.</div>';return}
- h+='<h3>Ваш дашборд: '+g.length+' '+(g.length==1?"блок":g.length<5?"блока":"блоков")+'</h3><p class="hint">Источники: '+(s.length?s.map(function(x){return N[x]}).join(", "):"пока не выбраны")+'</p>';
- g.forEach(function(k,n){var d=G[k],have=d.from.filter(function(x){return s.indexOf(x)>-1}),ok=have.length>0;
-  h+='<details class="blk"'+(n==0?" open":"")+'><summary><i>'+d.i+'</i>'+d.t+'<em>'+(ok?"из: "+have.map(function(x){return N[x]}).join(", "):"нужен источник")+'</em></summary><div><p>'+d.d+'</p><ul>'+d.ul.map(function(u){return "<li>"+u+"</li>"}).join("")+'</ul><p class="src">'+(ok?"Данные берём из ваших источников":"Подойдёт: "+d.from.map(function(x){return N[x]}).join(", "))+'</p></div></details>'});
- h+='<div class="cta"><a class="btn g" href="#kontakty">Обсудить мой дашборд</a></div><p class="hint" style="margin-top:12px">Это ориентир. Точный состав обсудим по вашим данным.</p>';
- o.innerHTML=h}
-document.getElementById("src").addEventListener("change",draw);document.getElementById("goal").addEventListener("change",draw);draw();
-})();
-</script><script>(function(){var T="https://t.me/pyankov_vv?text=";function $(i){return document.getElementById(i)}function f(n){return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0')}
-function calc(){var p=+$('i-p').value,h=+$('i-h').value,r=+$('i-r').value,s=+$('i-s').value;var hm=p*h*4.33,c=hm*r,m=c*s/100;$('v-p').textContent=p;$('v-h').textContent=h;$('v-r').textContent=r;$('v-s').textContent=s;
-$('o-c').textContent=f(c)+'\u00a0₽';$('o-h').textContent=f(hm);$('o-m').textContent=f(m)+'\u00a0₽';$('o-y').textContent=f(m*12)+'\u00a0₽';$('o-f').textContent=f(hm*s/100);$('cc-big').textContent=f(c)+'\u00a0₽';
-var t='Посчитал рутину на сайте: '+p+' чел. по '+h+' ч в неделю, час '+r+' ₽, это около '+f(c)+' ₽ в месяц. Хочу убрать '+s+'%.\nГде сейчас данные: \nМой вопрос: ';$('cc-go').href=T+encodeURIComponent(t)}
-if($('i-p')){['i-p','i-h','i-r','i-s'].forEach(function(i){$(i).addEventListener('input',calc)});calc()}
-if(!window.matchMedia||!matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelectorAll('#home .num,#home .kpi b').forEach(function(el){var txt=el.textContent.trim();if(!/^\d[\d\s]*$/.test(txt))return;var to=+txt.replace(/\s/g,'');if(!to)return;var st=null,sp=txt.indexOf(' ')>-1;function step(ts){if(!st)st=ts;var k=Math.min((ts-st)/700,1),v=Math.round(to*(1-Math.pow(1-k,3)));el.textContent=sp?f(v).replace(/\u00a0/g,' '):v;if(k<1)requestAnimationFrame(step);else el.textContent=txt}el.textContent=sp?'0':'0';requestAnimationFrame(step)})}})();</script></body></html>
+document.documentElement.classList.remove('no-js');
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const fmt=n=>Math.round(n).toLocaleString('ru-RU');
+/* шапка */
+addEventListener('scroll',()=>$('#nav').classList.toggle('sc',scrollY>8),{passive:true});
+/* появление */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+$$('.rv').forEach((e,i)=>{e.style.transitionDelay=(i%3)*80+'ms';io.observe(e)});
+/* счётчики */
+function count(el,to){if(RM){el.textContent=fmt(to);return}const t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1200);el.textContent=fmt(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)}
+$$('[data-n]').forEach(e=>count(e,+e.dataset.n));
+/* демо-панель (вымышленные данные) */
+const D={
+ 0:[["Пн","Вт","Ср","Чт","Пт","Сб","Вс"],[310,360,290,420,470,380,250],1,4.2,"18.4%"],
+ 1:[["Н1","Н2","Н3","Н4"],[1900,2150,1820,2420],1,9.8,"21.1%"],
+ 2:[["Окт","Ноя","Дек"],[8100,7600,9300],1,14.5,"19.6%"]};
+const SC=[1,.62,.38],PM=[[104,"+6%"],[96,"+2%"],[88,"-4%"]];
+let P=0,B=0;
+function render(){
+ const [labs,vals]=D[P],k=B?SC[B]:1,v=vals.map(x=>x*k),sum=v.reduce((a,b)=>a+b,0),mx=Math.max(...v);
+ const unit=P==0?'тыс':'тыс';
+ $('#k1').textContent=fmt(sum)+' '+unit+' ₽';$('#d1').textContent='▲ '+D[P][3]+'% к прошлому';$('#d1').className='up';
+ $('#k2').textContent=fmt(sum*.19)+' '+unit+' ₽';$('#d2').textContent='▲ '+(D[P][3]-1.1).toFixed(1)+'% к прошлому';$('#d2').className='up';
+ const debt=sum*[.34,.3,.38][B];$('#k3').textContent=fmt(debt)+' '+unit+' ₽';$('#d3').textContent=B==2?'▼ просрочка растёт':'▼ просрочка сократилась';$('#d3').className=B==2?'dn':'up';
+ const pl=[104,96,88][B];$('#k4').textContent=pl+'%';$('#d4').textContent=pl>=100?'план перевыполнен':'до плана '+(100-pl)+'%';$('#d4').className=pl>=100?'up':'dn';
+ $('#bars').innerHTML=v.map((x,i)=>`<div class="${i==v.length-1?'cur':''}" style="height:${Math.max(4,x/mx*100)}%" title="${fmt(x)} тыс ₽"></div>`).join('');
+ $('#bl').innerHTML=labs.map(l=>`<span>${l}</span>`).join('');
+ const al=[['r','Должник Альфа-Опт: просрочка 21 день, '+fmt(debt*.3)+' тыс ₽'],['y','Остаток по товару «Б-12» на 4 дня продаж'],['g','Налоговый платёж оплачен, срок закрыт'],['y','Маржа по группе «Сервис» ниже плана на 3 п.п.']];
+ if(B==1)al[0]=['r','Розница: 3 точки ниже плана 2 недели подряд'];if(B==2)al[3]=['r','Опт: 2 договора без закрывающих документов'];
+ $('#al').innerHTML=al.map(a=>`<li class="${a[0]}"><i></i>${a[1]}</li>`).join('');
+ if(!RM)$$('.k,.box').forEach(e=>{e.classList.remove('fade');void e.offsetWidth;e.classList.add('fade')});
+}
+$$('#sp button').forEach(b=>b.onclick=()=>{$$('#sp button').forEach(x=>x.classList.remove('on'));b.classList.add('on');P=+b.dataset.p;render()});
+$$('#sb button').forEach(b=>b.onclick=()=>{$$('#sb button').forEach(x=>x.classList.remove('on'));b.classList.add('on');B=+b.dataset.b;render()});
+render();
+/* автопереключение периода, пока владелец не тронул панель */
+let touched=false;['#sp','#sb'].forEach(s=>$(s).addEventListener('click',()=>touched=true));
+if(!RM)setInterval(()=>{if(touched||document.hidden)return;const bs=$$('#sp button');P=(P+1)%3;bs.forEach((x,i)=>x.classList.toggle('on',i==P));render()},4500);
+/* калькулятор */
+const TGC="https://t.me/pyankov_vv?text=";
+function calc(){
+ const p=+$('#ip').value,h=+$('#ih').value,r=+$('#ir').value,s=+$('#is').value;
+ $('#vp').textContent=p;$('#vh').textContent=h;$('#vr').textContent=fmt(r);$('#vs').textContent=s;
+ const hm=p*h*4.33,c=hm*r,m=c*s/100,y=m*12;
+ $('#oc').textContent=fmt(c)+' ₽';$('#oh').textContent=fmt(hm)+' ч';$('#om').textContent=fmt(m)+' ₽';$('#oy').textContent=fmt(y)+' ₽';
+ $('#cg').href=TGC+encodeURIComponent('Здравствуйте! Посчитал на сайте: '+p+' чел., '+h+' ч в неделю, час '+fmt(r)+' ₽, рутина около '+fmt(c)+' ₽ в месяц. Хочу обсудить автоматизацию.');
+}
+['#ip','#ih','#ir','#is'].forEach(s=>$(s).addEventListener('input',calc));calc();
+</script></body></html>
